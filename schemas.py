@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 import datetime
 from typing import Optional, List, Dict
-from .models import RunStatus
+from models import RunStatus
 
 class PlayerBase(BaseModel):
     name: str

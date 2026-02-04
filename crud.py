@@ -1,7 +1,10 @@
 from sqlalchemy.orm import Session, joinedload
 from typing import Optional
 from collections import Counter
-from . import models, schemas
+from sqlalchemy.orm import Session
+
+import models
+import schemas
 import datetime
 
 def create_player(db: Session, player: schemas.PlayerCreate):
