@@ -6,10 +6,20 @@ import crud
 import models
 import schemas
 from database import SessionLocal, engine, get_db
+from fastapi.middleware.cors import CORSMiddleware
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Combined endpoint for starting a run
 @app.post("/runs/start", response_model=schemas.RunStartResponse)
