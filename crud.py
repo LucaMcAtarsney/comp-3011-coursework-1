@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session, joinedload
 from typing import Optional
+from collections import Counter
 from . import models, schemas
 import datetime
 
@@ -44,6 +45,51 @@ def get_players_summary(db: Session, search: Optional[str] = None):
         summaries.append(summary)
         
     return summaries
+
+def get_player_stats(db: Session, player_id: int):
+    player = db.query(models.Player).options(joinedload(models.Player.runs)).filter(models.Player.id == player_id).first()
+    if not player:
+        return None
+
+    runs = player.runs
+    if not runs:
+        return schemas.PlayerStats(
+            player_name=player.name,
+            number_of_runs=0,
+            total_time_played=0,
+            average_time_survived=0.0,
+            longest_run=0,
+            favourite_upgrade=None,
+            total_monsters_slain=0
+        )
+
+    number_of_runs = len(runs)
+    total_time_played = sum(run.duration_seconds for run in runs)
+    average_time_survived = total_time_played / number_of_runs if number_of_runs > 0 else 0.0
+    longest_run = max(run.duration_seconds for run in runs)
+    total_monsters_slain = sum(run.kills_total for run in runs)
+
+    # Calculate favourite upgrade
+    all_upgrades = []
+    for run in runs:
+        if run.upgrades:
+            for upgrade, level in run.upgrades.items():
+                if level > 0:
+                    all_upgrades.append(upgrade)
+    
+    favourite_upgrade = None
+    if all_upgrades:
+        favourite_upgrade = Counter(all_upgrades).most_common(1)[0][0]
+
+    return schemas.PlayerStats(
+        player_name=player.name,
+        number_of_runs=number_of_runs,
+        total_time_played=total_time_played,
+        average_time_survived=average_time_survived,
+        longest_run=longest_run,
+        favourite_upgrade=favourite_upgrade,
+        total_monsters_slain=total_monsters_slain
+    )
 
 def create_run(db: Session, run: schemas.RunCreate):
     db_run = models.Run(player_id=run.player_id, map_id=run.map_id)

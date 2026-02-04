@@ -71,3 +71,16 @@ class RunStart(BaseModel):
 class RunStartResponse(BaseModel):
     player_id: int
     run_id: int
+
+class PlayerSummary(Player):
+    total_runs: int
+    best_run_time: Optional[int] = 0
+
+class PlayerStats(BaseModel):
+    player_name: str
+    number_of_runs: int
+    total_time_played: int
+    average_time_survived: float
+    longest_run: int
+    favourite_upgrade: Optional[str] = None
+    total_monsters_slain: int

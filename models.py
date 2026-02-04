@@ -37,3 +37,14 @@ class Run(Base):
 
     player = relationship("Player", back_populates="runs")
     events = relationship("RunEvent", back_populates="run")
+
+class RunEvent(Base):
+    __tablename__ = "run_events"
+
+    id = Column(Integer, primary_key=True, index=True)
+    run_id = Column(Integer, ForeignKey("runs.id"))
+    event_type = Column(String)
+    value = Column(String, nullable=True)
+    timestamp = Column(DateTime, default=datetime.datetime.now)
+
+    run = relationship("Run", back_populates="events")
