@@ -21,14 +21,46 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
+# Name validation endpoints
+@app.post("/players/check-name", response_model=schemas.NameCheckResponse)
+def check_name(request: schemas.NameCheckRequest, db: Session = Depends(get_db)):
+    """Check if a player name exists in the database"""
+    player_name = request.player_name.strip()
+    
+    if not player_name:
+        return {"exists": False, "message": "Name cannot be empty"}
+    
+    player = crud.get_player_by_name(db, name=player_name)
+    if player:
+        return {"exists": True, "message": "This username exists and can be used"}
+    else:
+        return {"exists": False, "message": "This username does not exist"}
+
+@app.get("/players/generate-name", response_model=schemas.GenerateNameResponse)
+def generate_name(db: Session = Depends(get_db)):
+    """Generate a new random player name that doesn't exist in the database"""
+    new_name = crud.generate_available_player_name(db)
+    return {"player_name": new_name}
+
 # Combined endpoint for starting a run
 @app.post("/runs/start", response_model=schemas.RunStartResponse)
 def start_run(run_start: schemas.RunStart, db: Session = Depends(get_db)):
-    # Get or create player
-    player = crud.get_player_by_name(db, name=run_start.player_name)
-    if not player:
-        player_create = schemas.PlayerCreate(name=run_start.player_name)
+    player_name = run_start.player_name.strip()
+    
+    # If no name provided or empty, generate a random name for new player
+    if not player_name:
+        player_name = crud.generate_available_player_name(db)
+        player_create = schemas.PlayerCreate(name=player_name)
         player = crud.create_player(db=db, player=player_create)
+    else:
+        # Name was provided - check if it exists in database
+        player = crud.get_player_by_name(db, name=player_name)
+        if not player:
+            # Name doesn't exist - reject it
+            raise HTTPException(
+                status_code=403, 
+                detail="This username does not exist. Please use an existing username or leave blank for a new random name."
+            )
     
     # Create the run
     run_create = schemas.RunCreate(player_id=player.id, map_id=run_start.map_id)

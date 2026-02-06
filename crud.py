@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 import models
 import schemas
 import datetime
+import name_pool
 
 def create_player(db: Session, player: schemas.PlayerCreate):
     db_player = models.Player(name=player.name)
@@ -22,6 +23,16 @@ def get_player_by_name(db: Session, name: str):
 
 def get_players(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Player).offset(skip).limit(limit).all()
+
+def get_all_player_names(db: Session) -> list[str]:
+    """Get all existing player names from the database"""
+    players = db.query(models.Player.name).all()
+    return [player.name for player in players]
+
+def generate_available_player_name(db: Session) -> str:
+    """Generate a unique random name that doesn't exist in the database"""
+    existing_names = get_all_player_names(db)
+    return name_pool.generate_unique_name(existing_names)
 
 def get_players_summary(db: Session, search: Optional[str] = None):
     query = db.query(models.Player).options(joinedload(models.Player.runs))

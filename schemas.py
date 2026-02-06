@@ -84,3 +84,13 @@ class PlayerStats(BaseModel):
     longest_run: int
     favourite_upgrade: Optional[str] = None
     total_monsters_slain: int
+
+class NameCheckRequest(BaseModel):
+    player_name: str
+
+class NameCheckResponse(BaseModel):
+    exists: bool
+    message: str
+
+class GenerateNameResponse(BaseModel):
+    player_name: str
