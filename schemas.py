@@ -67,6 +67,7 @@ class RunEvent(RunEventBase):
 class RunStart(BaseModel):
     player_name: str
     map_id: str
+    create_new_player: bool = False  # Allow creating new player with provided name
 
 class RunStartResponse(BaseModel):
     player_id: int

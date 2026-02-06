@@ -56,11 +56,16 @@ def start_run(run_start: schemas.RunStart, db: Session = Depends(get_db)):
         # Name was provided - check if it exists in database
         player = crud.get_player_by_name(db, name=player_name)
         if not player:
-            # Name doesn't exist - reject it
-            raise HTTPException(
-                status_code=403, 
-                detail="This username does not exist. Please use an existing username or leave blank for a new random name."
-            )
+            # If create_new_player flag is True, create the player with this name
+            if run_start.create_new_player:
+                player_create = schemas.PlayerCreate(name=player_name)
+                player = crud.create_player(db=db, player=player_create)
+            else:
+                # Name doesn't exist and not creating new - reject it
+                raise HTTPException(
+                    status_code=403, 
+                    detail="This username does not exist. Please use an existing username or leave blank for a new random name."
+                )
     
     # Create the run
     run_create = schemas.RunCreate(player_id=player.id, map_id=run_start.map_id)
