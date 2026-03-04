@@ -10,6 +10,7 @@ class Player(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
+    hashed_password = Column(String, nullable=False) # Add this line
     created_at = Column(DateTime, default=datetime.datetime.now)
 
     runs = relationship("Run", back_populates="player")

@@ -14,6 +14,9 @@ class Player(PlayerBase):
     created_at: datetime.datetime
     model_config = ConfigDict(from_attributes=True)
 
+class PlayerCreateResponse(Player):
+    password: str # Add this to return the new password
+
 class RunBase(BaseModel):
     player_id: int
     map_id: str
@@ -60,6 +63,7 @@ class RunEvent(RunEventBase):
 
 class RunStart(BaseModel):
     player_name: str
+    password: Optional[str] = None # Add password field
     map_id: str
     create_new_player: bool = False
 

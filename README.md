@@ -12,7 +12,7 @@ This project is a FastAPI-based backend for tracking player statistics and game 
 ## Tech Stack
 
 - **Backend:** FastAPI
-- **Database:** SQLAlchemy with SQLite (default)
+- **Database:** SQLAlchemy with SQLite
 - **Data Validation:** Pydantic
 
 ## Getting Started

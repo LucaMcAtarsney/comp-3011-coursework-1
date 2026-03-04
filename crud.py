@@ -7,13 +7,24 @@ import models
 import schemas
 import datetime
 import name_pool
+import secrets
+import string
+from auth import get_password_hash
+
+def generate_random_password(length: int = 12) -> str:
+    """Generate a secure random password."""
+    alphabet = string.ascii_letters + string.digits
+    return ''.join(secrets.choice(alphabet) for i in range(length))
 
 def create_player(db: Session, player: schemas.PlayerCreate):
-    db_player = models.Player(name=player.name)
+    password = generate_random_password()
+    hashed_password = get_password_hash(password)
+    db_player = models.Player(name=player.name, hashed_password=hashed_password)
     db.add(db_player)
     db.commit()
     db.refresh(db_player)
-    return db_player
+    # Return the player object and the plain password
+    return db_player, password
 
 def get_player(db: Session, player_id: int):
     return db.query(models.Player).filter(models.Player.id == player_id).first()
@@ -66,30 +77,28 @@ def get_player_stats(db: Session, player_id: int):
         return None
 
     runs = player.runs
-    if not runs:
+    total_runs = len(runs)
+    if total_runs == 0:
         return schemas.PlayerStats(
             player_name=player.name,
             number_of_runs=0,
             total_time_played=0,
             average_time_survived=0.0,
             longest_run=0,
-            favourite_upgrade=None,
-            total_monsters_slain=0
+            total_monsters_slain=0,
+            favourite_upgrade=None
         )
 
-    number_of_runs = len(runs)
     total_time_played = sum(run.duration_seconds for run in runs)
-    average_time_survived = total_time_played / number_of_runs if number_of_runs > 0 else 0.0
+    average_time_survived = total_time_played / total_runs
     longest_run = max(run.duration_seconds for run in runs)
     total_monsters_slain = sum(run.kills_total for run in runs)
 
-    # Calculate favourite upgrade
+    # Find favourite upgrade
     all_upgrades = []
     for run in runs:
         if run.upgrades:
-            for upgrade, level in run.upgrades.items():
-                if level > 0:
-                    all_upgrades.append(upgrade)
+            all_upgrades.extend(run.upgrades.keys())
     
     favourite_upgrade = None
     if all_upgrades:
@@ -97,12 +106,12 @@ def get_player_stats(db: Session, player_id: int):
 
     return schemas.PlayerStats(
         player_name=player.name,
-        number_of_runs=number_of_runs,
+        number_of_runs=total_runs,
         total_time_played=total_time_played,
         average_time_survived=average_time_survived,
         longest_run=longest_run,
-        favourite_upgrade=favourite_upgrade,
-        total_monsters_slain=total_monsters_slain
+        total_monsters_slain=total_monsters_slain,
+        favourite_upgrade=favourite_upgrade
     )
 
 def create_run(db: Session, run: schemas.RunCreate):

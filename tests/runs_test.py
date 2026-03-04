@@ -36,12 +36,14 @@ def test_start_run():
     # 1. Create a player first
     player_response = client.post("/players", json={"name": "run_tester"})
     assert player_response.status_code == 200
-    player_name = player_response.json()["name"]
+    player_data = player_response.json()
+    player_name = player_data["name"]
+    password = player_data["password"]
 
-    # 2. Start a run for that player
+    # 2. Start a run for that player using their password
     run_response = client.post(
         "/runs/start",
-        json={"player_name": player_name, "map_id": "map1"}
+        json={"player_name": player_name, "password": password, "map_id": "map1", "create_new_player": False}
     )
     assert run_response.status_code == 200
     run_data = run_response.json()
@@ -50,8 +52,10 @@ def test_start_run():
 def test_update_run():
     # 1. Start a run (as above)
     player_response = client.post("/players", json={"name": "run_updater"})
-    player_name = player_response.json()["name"]
-    run_response = client.post("/runs/start", json={"player_name": player_name, "map_id": "map1"})
+    player_data = player_response.json()
+    player_name = player_data["name"]
+    password = player_data["password"]
+    run_response = client.post("/runs/start", json={"player_name": player_name, "password": password, "map_id": "map1", "create_new_player": False})
     run_id = run_response.json()["run_id"]
 
     # 2. Update the run with new stats
@@ -67,8 +71,10 @@ def test_update_run():
 def test_end_run():
     # 1. Start a run
     player_response = client.post("/players", json={"name": "run_ender"})
-    player_name = player_response.json()["name"]
-    run_response = client.post("/runs/start", json={"player_name": player_name, "map_id": "map1"})
+    player_data = player_response.json()
+    player_name = player_data["name"]
+    password = player_data["password"]
+    run_response = client.post("/runs/start", json={"player_name": player_name, "password": password, "map_id": "map1", "create_new_player": False})
     run_id = run_response.json()["run_id"]
 
     # 2. End the run

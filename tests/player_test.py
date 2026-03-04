@@ -40,6 +40,7 @@ def test_create_player():
     data = response.json()
     assert data["name"] == "testplayer"
     assert "id" in data
+    assert "password" in data
 
 def test_create_player_duplicate_name():
     client.post("/players", json={"name": "testplayer"}) # first player

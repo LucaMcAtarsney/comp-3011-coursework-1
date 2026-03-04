@@ -7,6 +7,8 @@ import models
 import schemas
 from database import SessionLocal, engine, get_db
 from fastapi.middleware.cors import CORSMiddleware
+from auth import get_current_admin, verify_password
+import auth
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -47,25 +49,27 @@ def generate_name(db: Session = Depends(get_db)):
 def start_run(run_start: schemas.RunStart, db: Session = Depends(get_db)):
     player_name = run_start.player_name.strip()
     
-    # If no name provided or empty, generate a random name for new player
-    if not player_name:
-        player_name = crud.generate_available_player_name(db)
+    if run_start.create_new_player:
+        if not player_name:
+            player_name = crud.generate_available_player_name(db)
+        
         player_create = schemas.PlayerCreate(name=player_name)
-        player = crud.create_player(db=db, player=player_create)
+        db_player_check = crud.get_player_by_name(db, name=player_name)
+        if db_player_check:
+            raise HTTPException(status_code=400, detail="Cannot create new player, name already exists.")
+        
+        player, _ = crud.create_player(db=db, player=player_create)
     else:
-        # Name was provided - check if it exists in database
+        # Authenticate existing player
+        if not player_name or not run_start.password:
+            raise HTTPException(status_code=401, detail="Username and password required for existing players.")
+            
         player = crud.get_player_by_name(db, name=player_name)
-        if not player:
-            # If create_new_player flag is True, create the player with this name
-            if run_start.create_new_player:
-                player_create = schemas.PlayerCreate(name=player_name)
-                player = crud.create_player(db=db, player=player_create)
-            else:
-                # Name doesn't exist and not creating new - reject it
-                raise HTTPException(
-                    status_code=403, 
-                    detail="This username does not exist. Please use an existing username or leave blank for a new random name."
-                )
+        if not player or not auth.verify_password(run_start.password, player.hashed_password):
+            raise HTTPException(
+                status_code=401,
+                detail="Incorrect username or password",
+            )
     
     # Create the run
     run_create = schemas.RunCreate(player_id=player.id, map_id=run_start.map_id)
@@ -84,12 +88,20 @@ def get_runs(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     runs = crud.get_runs(db, skip=skip, limit=limit)
     return runs
 
-@app.post("/players", response_model=schemas.Player)
+@app.post("/players", response_model=schemas.PlayerCreateResponse)
 def create_player(player: schemas.PlayerCreate, db: Session = Depends(get_db)):
-    db_player = crud.get_player_by_name(db, name=player.name)
-    if db_player:
+    db_player_check = crud.get_player_by_name(db, name=player.name)
+    if db_player_check:
         raise HTTPException(status_code=400, detail="Player name already registered")
-    return crud.create_player(db=db, player=player)
+    
+    db_player, plain_password = crud.create_player(db=db, player=player)
+    
+    return schemas.PlayerCreateResponse(
+        id=db_player.id,
+        name=db_player.name,
+        created_at=db_player.created_at,
+        password=plain_password  # This is the only time the password is sent
+    )
 
 @app.post("/runs", response_model=schemas.Run)
 def create_run(run: schemas.RunCreate, db: Session = Depends(get_db)):
@@ -196,14 +208,18 @@ def get_leaderboard(skip: int = 0, limit: int = 10, db: Session = Depends(get_db
     return leaderboard_runs
 
 @app.get("/analytics/players-summary", response_model=List[schemas.PlayerSummary])
-def get_players_summary(db: Session = Depends(get_db), search: Optional[str] = None):
+def get_players_summary(
+    db: Session = Depends(get_db), 
+    search: Optional[str] = None,
+    admin_user: str = Depends(get_current_admin) # <-- This protects the endpoint
+):
     return crud.get_players_summary(db, search=search)
 
 @app.get("/analytics/view_player_stats/{player_id}", response_model=schemas.PlayerStats)
 def view_player_stats(player_id: int, db: Session = Depends(get_db)):
     stats = crud.get_player_stats(db, player_id=player_id)
     if not stats:
-        raise HTTPException(status_code=404, detail="Player not found")
+        raise HTTPException(status_code=404, detail="Player not found or has no runs")
     return stats
 
 @app.get("/players/{player_id}/runs", response_model=List[schemas.Run])
