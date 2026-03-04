@@ -2,14 +2,15 @@ from pydantic import BaseModel, ConfigDict
 import datetime
 from typing import Optional, List, Dict
 from models import RunStatus
-import string
-import secrets
 
 class PlayerBase(BaseModel):
     name: str
 
 class PlayerCreate(PlayerBase):
-    password: str # Make password required on creation
+    password: str
+
+class PlayerNameUpdate(BaseModel):
+    name: str
 
 class Player(PlayerBase):
     id: int
@@ -17,7 +18,6 @@ class Player(PlayerBase):
     model_config = ConfigDict(from_attributes=True)
 
 class PlayerCreateResponse(Player):
-    # The user provides the password, so we don't need to send it back.
     pass
 
 class RunBase(BaseModel):
@@ -66,14 +66,13 @@ class RunEvent(RunEventBase):
 
 class RunStart(BaseModel):
     player_name: str
-    password: Optional[str] = None # Add password field
+    password: Optional[str] = None
     map_id: str
     create_new_player: bool = False
 
 class RunStartResponse(BaseModel):
     player_id: int
     run_id: int
-    # Password is no longer sent in the response
 
 class PlayerSummary(Player):
     total_runs: int
@@ -97,20 +96,3 @@ class NameCheckResponse(BaseModel):
 
 class GenerateNameResponse(BaseModel):
     player_name: str
-
-def generate_random_password(length: int = 12) -> str:
-    """Generate a secure random password."""
-    alphabet = string.ascii_letters + string.digits
-    return ''.join(secrets.choice(alphabet) for i in range(length))
-
-def create_player(db: Session, player: schemas.PlayerCreate):
-    hashed_password = get_password_hash(player.password)
-    db_player = models.Player(name=player.name, hashed_password=hashed_password)
-    db.add(db_player)
-    db.commit()
-    db.refresh(db_player)
-    # Return just the player object, not the plain password
-    return db_player
-
-def get_player(db: Session, player_id: int):
-    return db.query(models.Player).filter(models.Player.id == player_id).first()

@@ -32,17 +32,24 @@ def authenticate_player(db: Session, name: str, password: str) -> Optional[model
         return None
     return player
 
-def get_current_admin(credentials: HTTPBasicCredentials = Depends(security)):
-    correct_username = secrets.compare_digest(credentials.username, "admin") 
-    correct_password = secrets.compare_digest(credentials.password, "admin") 
+# --- Admin Authentication ---
+admin_credentials_exception = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Invalid admin credentials",
+    headers={"WWW-Authenticate": "Basic"},
+)
+
+def get_current_admin(credentials: HTTPBasicCredentials = Depends(HTTPBasic(realm="admin"))):
+    """Dependency to protect admin-only endpoints."""
+    # For simplicity, we'll hardcode the admin credentials.
+    # In a real app, use environment variables and secrets management.
+    correct_username = "admin"
+    correct_password = "admin"
     
-    is_correct_username = correct_username
-    is_correct_password = correct_password
+    is_user_correct = secrets.compare_digest(credentials.username, correct_username)
+    is_pass_correct = secrets.compare_digest(credentials.password, correct_password)
     
-    if not (is_correct_username and is_correct_password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password for admin access",
-            headers={"WWW-Authenticate": "Basic"},
-        )
+    if not (is_user_correct and is_pass_correct):
+        raise admin_credentials_exception
+    
     return credentials.username

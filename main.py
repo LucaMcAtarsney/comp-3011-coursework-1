@@ -55,11 +55,11 @@ def start_run(run_input: schemas.RunStart, db: Session = Depends(get_db)):
             raise HTTPException(status_code=400, detail="Password is required for new players.")
         
         # Create a new player
-        player_create = schemas.PlayerCreate(name=run_input.player_name, password=run_input.password)
+        player_create = schemas.PlayerCreate(name=run_input.player_name, password=run.input.password)
         db_player = crud.create_player(db=db, player=player_create)
         
         # Create a new run for the new player
-        run_create = schemas.RunCreate(player_id=db_player.id, map_id=run_input.map_id)
+        run_create = schemas.RunCreate(player_id=db_player.id, map_id=run.input.map_id)
         db_run = crud.create_run(db=db, run=run_create)
         
         # Return the response without the password
@@ -71,12 +71,12 @@ def start_run(run_input: schemas.RunStart, db: Session = Depends(get_db)):
     # --- Logic for existing players ---
     else:
         # Authenticate the existing player
-        player = auth.authenticate_player(db, name=run_input.player_name, password=run_input.password)
+        player = auth.authenticate_player(db, name=run.input.player_name, password=run.input.password)
         if not player:
             raise HTTPException(status_code=403, detail="Invalid credentials")
         
         # Create a new run for the existing player
-        run_create = schemas.RunCreate(player_id=player.id, map_id=run_input.map_id)
+        run_create = schemas.RunCreate(player_id=player.id, map_id=run.input.map_id)
         db_run = crud.create_run(db=db, run=run_create)
         
         # Return the response (no password needed for existing players)
@@ -88,8 +88,15 @@ def get_players(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     players = crud.get_players(db, skip=skip, limit=limit)
     return players
 
+@app.get("/players/{player_id}", response_model=schemas.Player)
+def read_player(player_id: int, db: Session = Depends(get_db)):
+    db_player = crud.get_player(db, player_id=player_id)
+    if db_player is None:
+        raise HTTPException(status_code=404, detail="Player not found")
+    return db_player
+
 @app.get("/runs", response_model=List[schemas.Run])
-def get_runs(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def read_runs(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     runs = crud.get_runs(db, skip=skip, limit=limit)
     return runs
 
@@ -214,8 +221,7 @@ def get_leaderboard(skip: int = 0, limit: int = 10, db: Session = Depends(get_db
 @app.get("/analytics/players-summary", response_model=List[schemas.PlayerSummary])
 def get_players_summary(
     db: Session = Depends(get_db), 
-    search: Optional[str] = None,
-    admin_user: str = Depends(get_current_admin) # <-- This protects the endpoint
+    search: Optional[str] = None
 ):
     return crud.get_players_summary(db, search=search)
 
@@ -243,6 +249,51 @@ def get_run_events(run_id: int, db: Session = Depends(get_db)):
     events = crud.get_run_events(db, run_id=run_id)
     return events
 
+# --- Admin Endpoints ---
+
+@app.get("/admin/login", status_code=200)
+def admin_login(admin_user: str = Depends(get_current_admin)):
+    """Endpoint to verify admin credentials."""
+    return {"message": "Admin authentication successful"}
+
+@app.patch("/admin/players/{player_id}", response_model=schemas.Player)
+def admin_update_player_name(
+    player_id: int, 
+    update_data: schemas.PlayerNameUpdate,
+    db: Session = Depends(get_db), 
+    admin_user: str = Depends(get_current_admin)
+):
+    """Admin: Update a player's name."""
+    db_player = crud.update_player_name(db, player_id=player_id, new_name=update_data.name)
+    if not db_player:
+        raise HTTPException(status_code=404, detail="Player not found")
+    return db_player
+
+@app.delete("/admin/runs/{run_id}", status_code=204)
+def admin_delete_run(
+    run_id: int, 
+    db: Session = Depends(get_db), 
+    admin_user: str = Depends(get_current_admin)
+):
+    """Admin: Delete a run."""
+    db_run = crud.delete_run(db, run_id=run_id)
+    if not db_run:
+        raise HTTPException(status_code=404, detail="Run not found")
+    return Response(status_code=204)
+
+@app.delete("/admin/players/{player_id}", status_code=204)
+def admin_delete_player(
+    player_id: int, 
+    db: Session = Depends(get_db), 
+    admin_user: str = Depends(get_current_admin)
+):
+    """Admin: Delete a player and all their runs."""
+    db_player = crud.delete_player(db, player_id=player_id)
+    if db_player is None:
+        raise HTTPException(status_code=404, detail="Player not found")
+    return Response(status_code=204)
+
+
 @app.delete("/runs/{run_id}")
 def delete_run(run_id: int, db: Session = Depends(get_db)):
     db_run = crud.delete_run(db, run_id=run_id)
@@ -250,12 +301,14 @@ def delete_run(run_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Run not found")
     return {"message": "Run and associated events deleted successfully"}
 
-@app.delete("/players/{player_id}")
+@app.delete("/players/{player_id}", status_code=204)
 def delete_player(player_id: int, db: Session = Depends(get_db)):
+    """Endpoint to delete a player."""
     db_player = crud.delete_player(db, player_id=player_id)
-    if not db_player:
+    if db_player is None:
         raise HTTPException(status_code=404, detail="Player not found")
-    return {"message": "Player and all associated data deleted successfully"}
+    # No content is returned on successful deletion
+    return Response(status_code=204)
 
 @app.get("/test1")
 def test_endpoint_one():

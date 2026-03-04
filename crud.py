@@ -31,13 +31,26 @@ def get_player(db: Session, player_id: int):
 def get_player_by_name(db: Session, name: str):
     return db.query(models.Player).filter(models.Player.name == name).first()
 
-def get_players(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Player).offset(skip).limit(limit).all()
+def update_player_name(db: Session, player_id: int, new_name: str):
+    """Update a player's name."""
+    db_player = db.query(models.Player).filter(models.Player.id == player_id).first()
+    if db_player:
+        db_player.name = new_name
+        db.commit()
+        db.refresh(db_player)
+        return db_player
+    return None
 
-def get_all_player_names(db: Session) -> list[str]:
-    """Get all existing player names from the database"""
-    players = db.query(models.Player.name).all()
-    return [player.name for player in players]
+def delete_player(db: Session, player_id: int):
+    """Delete a player and all their associated runs."""
+    db_player = db.query(models.Player).filter(models.Player.id == player_id).first()
+    if db_player:
+        # Also delete associated runs to keep the database clean
+        db.query(models.Run).filter(models.Run.player_id == player_id).delete()
+        db.delete(db_player)
+        db.commit()
+        return db_player
+    return None
 
 def check_player_name(db: Session, player_name: str):
     """Check if a player name exists and return a specific dictionary format."""
@@ -46,6 +59,11 @@ def check_player_name(db: Session, player_name: str):
         return {"exists": True, "message": "This username exists and can be used"}
     else:
         return {"exists": False, "message": "This username does not exist"}
+
+
+def get_all_player_names(db: Session) -> list[str]:
+    """Return a list of all player names in the database."""
+    return [name for name, in db.query(models.Player.name).all()]
 
 
 def generate_available_player_name(db: Session) -> str:
@@ -185,26 +203,3 @@ def delete_run(db: Session, run_id: int):
         db.delete(db_run)
         db.commit()
     return db_run
-
-def delete_player(db: Session, player_id: int):
-    db_player = get_player(db, player_id)
-    if db_player:
-        # also delete runs and events associated with the player
-        runs = db.query(models.Run).filter(models.Run.player_id == player_id).all()
-        for run in runs:
-            db.query(models.RunEvent).filter(models.RunEvent.run_id == run.id).delete()
-            db.delete(run)
-        db.delete(db_player)
-        db.commit()
-    return db_player
-
-
-def create_run_event(db: Session, run_id: int, event: schemas.RunEventCreate):
-    db_event = models.RunEvent(**event.dict(), run_id=run_id)
-    db.add(db_event)
-    db.commit()
-    db.refresh(db_event)
-    return db_event
-
-def get_run_events(db: Session, run_id: int, skip: int = 0, limit: int = 100):
-    return db.query(models.RunEvent).filter(models.RunEvent.run_id == run_id).offset(skip).limit(limit).all()
