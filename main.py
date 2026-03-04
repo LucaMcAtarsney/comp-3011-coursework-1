@@ -46,36 +46,41 @@ def generate_name(db: Session = Depends(get_db)):
 
 # Combined endpoint for starting a run
 @app.post("/runs/start", response_model=schemas.RunStartResponse)
-def start_run(run_start: schemas.RunStart, db: Session = Depends(get_db)):
-    player_name = run_start.player_name.strip()
-    
-    if run_start.create_new_player:
-        if not player_name:
-            player_name = crud.generate_available_player_name(db)
+def start_run(run_input: schemas.RunStart, db: Session = Depends(get_db)):
+    if run_input.create_new_player:
+        # Check if the name is already taken
+        if crud.get_player_by_name(db, name=run_input.player_name):
+            raise HTTPException(status_code=400, detail="Player name already exists.")
+        if not run_input.password:
+            raise HTTPException(status_code=400, detail="Password is required for new players.")
         
-        player_create = schemas.PlayerCreate(name=player_name)
-        db_player_check = crud.get_player_by_name(db, name=player_name)
-        if db_player_check:
-            raise HTTPException(status_code=400, detail="Cannot create new player, name already exists.")
+        # Create a new player
+        player_create = schemas.PlayerCreate(name=run_input.player_name, password=run_input.password)
+        db_player = crud.create_player(db=db, player=player_create)
         
-        player, _ = crud.create_player(db=db, player=player_create)
+        # Create a new run for the new player
+        run_create = schemas.RunCreate(player_id=db_player.id, map_id=run_input.map_id)
+        db_run = crud.create_run(db=db, run=run_create)
+        
+        # Return the response without the password
+        return schemas.RunStartResponse(
+            player_id=db_player.id,
+            run_id=db_run.id
+        )
+
+    # --- Logic for existing players ---
     else:
-        # Authenticate existing player
-        if not player_name or not run_start.password:
-            raise HTTPException(status_code=401, detail="Username and password required for existing players.")
-            
-        player = crud.get_player_by_name(db, name=player_name)
-        if not player or not auth.verify_password(run_start.password, player.hashed_password):
-            raise HTTPException(
-                status_code=401,
-                detail="Incorrect username or password",
-            )
-    
-    # Create the run
-    run_create = schemas.RunCreate(player_id=player.id, map_id=run_start.map_id)
-    new_run = crud.create_run(db=db, run=run_create)
-    
-    return {"player_id": player.id, "run_id": new_run.id}
+        # Authenticate the existing player
+        player = auth.authenticate_player(db, name=run_input.player_name, password=run_input.password)
+        if not player:
+            raise HTTPException(status_code=403, detail="Invalid credentials")
+        
+        # Create a new run for the existing player
+        run_create = schemas.RunCreate(player_id=player.id, map_id=run_input.map_id)
+        db_run = crud.create_run(db=db, run=run_create)
+        
+        # Return the response (no password needed for existing players)
+        return schemas.RunStartResponse(player_id=player.id, run_id=db_run.id)
 
 
 @app.get("/players", response_model=List[schemas.Player])
@@ -94,13 +99,12 @@ def create_player(player: schemas.PlayerCreate, db: Session = Depends(get_db)):
     if db_player_check:
         raise HTTPException(status_code=400, detail="Player name already registered")
     
-    db_player, plain_password = crud.create_player(db=db, player=player)
+    db_player = crud.create_player(db=db, player=player)
     
     return schemas.PlayerCreateResponse(
         id=db_player.id,
         name=db_player.name,
-        created_at=db_player.created_at,
-        password=plain_password  # This is the only time the password is sent
+        created_at=db_player.created_at
     )
 
 @app.post("/runs", response_model=schemas.Run)

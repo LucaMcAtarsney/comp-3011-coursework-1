@@ -9,7 +9,7 @@ import datetime
 import name_pool
 import secrets
 import string
-from auth import get_password_hash
+from auth import get_password_hash, generate_password
 
 def generate_random_password(length: int = 12) -> str:
     """Generate a secure random password."""
@@ -17,14 +17,13 @@ def generate_random_password(length: int = 12) -> str:
     return ''.join(secrets.choice(alphabet) for i in range(length))
 
 def create_player(db: Session, player: schemas.PlayerCreate):
-    password = generate_random_password()
-    hashed_password = get_password_hash(password)
+    hashed_password = get_password_hash(player.password)
     db_player = models.Player(name=player.name, hashed_password=hashed_password)
     db.add(db_player)
     db.commit()
     db.refresh(db_player)
-    # Return the player object and the plain password
-    return db_player, password
+    # Return just the player object, not the plain password
+    return db_player
 
 def get_player(db: Session, player_id: int):
     return db.query(models.Player).filter(models.Player.id == player_id).first()
@@ -39,6 +38,15 @@ def get_all_player_names(db: Session) -> list[str]:
     """Get all existing player names from the database"""
     players = db.query(models.Player.name).all()
     return [player.name for player in players]
+
+def check_player_name(db: Session, player_name: str):
+    """Check if a player name exists and return a specific dictionary format."""
+    player = get_player_by_name(db, name=player_name)
+    if player:
+        return {"exists": True, "message": "This username exists and can be used"}
+    else:
+        return {"exists": False, "message": "This username does not exist"}
+
 
 def generate_available_player_name(db: Session) -> str:
     """Generate a unique random name that doesn't exist in the database"""
