@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 import datetime
 from typing import Optional, List, Dict
 from models import RunStatus
@@ -9,12 +9,10 @@ class PlayerBase(BaseModel):
 class PlayerCreate(PlayerBase):
     pass
 
-    class Config:
-        from_attributes = True
-
 class Player(PlayerBase):
     id: int
     created_at: datetime.datetime
+    model_config = ConfigDict(from_attributes=True)
 
 class RunBase(BaseModel):
     player_id: int
@@ -35,7 +33,7 @@ class RunUpdate(BaseModel):
 
 class Run(RunBase):
     id: int
-    player: Player  # Include the full Player object
+    player: Player
     started_at: datetime.datetime
     status: RunStatus
     duration_seconds: int
@@ -45,9 +43,7 @@ class Run(RunBase):
     upgrades: Optional[Dict[str, int]] = None
     ended_at: Optional[datetime.datetime]
     cause_of_death: Optional[str]
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class RunEventBase(BaseModel):
     event_type: str
@@ -60,14 +56,12 @@ class RunEvent(RunEventBase):
     id: int
     run_id: int
     timestamp: datetime.datetime
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class RunStart(BaseModel):
     player_name: str
     map_id: str
-    create_new_player: bool = False  # Allow creating new player with provided name
+    create_new_player: bool = False
 
 class RunStartResponse(BaseModel):
     player_id: int
