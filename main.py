@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
@@ -55,11 +55,11 @@ def start_run(run_input: schemas.RunStart, db: Session = Depends(get_db)):
             raise HTTPException(status_code=400, detail="Password is required for new players.")
         
         # Create a new player
-        player_create = schemas.PlayerCreate(name=run_input.player_name, password=run.input.password)
+        player_create = schemas.PlayerCreate(name=run_input.player_name, password=run_input.password)
         db_player = crud.create_player(db=db, player=player_create)
         
         # Create a new run for the new player
-        run_create = schemas.RunCreate(player_id=db_player.id, map_id=run.input.map_id)
+        run_create = schemas.RunCreate(player_id=db_player.id, map_id=run_input.map_id)
         db_run = crud.create_run(db=db, run=run_create)
         
         # Return the response without the password
@@ -71,12 +71,12 @@ def start_run(run_input: schemas.RunStart, db: Session = Depends(get_db)):
     # --- Logic for existing players ---
     else:
         # Authenticate the existing player
-        player = auth.authenticate_player(db, name=run.input.player_name, password=run.input.password)
+        player = auth.authenticate_player(db, name=run_input.player_name, password=run_input.password)
         if not player:
             raise HTTPException(status_code=403, detail="Invalid credentials")
         
         # Create a new run for the existing player
-        run_create = schemas.RunCreate(player_id=player.id, map_id=run.input.map_id)
+        run_create = schemas.RunCreate(player_id=player.id, map_id=run_input.map_id)
         db_run = crud.create_run(db=db, run=run_create)
         
         # Return the response (no password needed for existing players)
