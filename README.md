@@ -1,4 +1,4 @@
-# Player Stats API
+# Survival Game API
 
 ## Project Overview
 
@@ -95,3 +95,23 @@ python -m pytest
 ```
 
 This command will discover and run all tests in the `tests/` directory, ensuring all parts of the application are working as expected.
+
+## API Documentation
+
+This project includes automatically generated API documentation.
+
+-   **Interactive Docs**: While the application is running, you can access the interactive Swagger UI at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+-   **PDF Documentation**: A full PDF of the API reference can be generated. First, ensure you have installed the documentation tools:
+    ```sh
+    # Install Node.js tools if you haven't already
+    npm install -g widdershins
+    
+    # Install Python tools
+    pip install mkdocs mkdocs-material mkdocs-with-pdf
+    ```
+    Then, run the following commands to generate the `api-documentation.pdf` file:
+    ```sh
+    python generate_openapi.py
+    mkdocs build
+    ```
+    You can view the final document here: [API Documentation (PDF)](api-documentation.pdf)

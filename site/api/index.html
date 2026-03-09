@@ -1,0 +1,6041 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Player and Run Tracker API v1.0.0 - Survival Video Game API Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#authentication" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Survival Video Game API Docs" class="md-header__button md-logo" aria-label="Survival Video Game API Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Survival Video Game API Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Player and Run Tracker API v1.0.0
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Survival Video Game API Docs" class="md-nav__button md-logo" aria-label="Survival Video Game API Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Survival Video Game API Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#check-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check Name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generate Name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-players" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Players
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Player
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read Player
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Player
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Runs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get Runs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enumerated-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enumerated Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-run-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Run Event
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-run-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Run Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-leaderboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Leaderboard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-players-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Players Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-player-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View Player Stats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-player-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Player Runs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get Player Runs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enumerated-values_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enumerated Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Login
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-update-player-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Update Player Name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-delete-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Delete Player
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-delete-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Delete Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-endpoint-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Endpoint One
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-endpoint-two" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Endpoint Two
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-endpoint-three" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Endpoint Three
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#check-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check Name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generate Name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-players" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Players
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Player
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read Player
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Player
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Runs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get Runs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enumerated-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enumerated Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Delete Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-run-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create Run Event
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-run-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Run Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-leaderboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Leaderboard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-players-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Players Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-player-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View Player Stats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-player-runs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Player Runs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get Player Runs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enumerated-values_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enumerated Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Login
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-update-player-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Update Player Name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-delete-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Delete Player
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#admin-delete-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Admin Delete Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-endpoint-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Endpoint One
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-endpoint-two" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Endpoint Two
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-endpoint-three" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Endpoint Three
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<!-- Generator: Widdershins v4.0.1 -->
+
+<h1 id="player-and-run-tracker-api">Player and Run Tracker API v1.0.0</h1>
+
+<blockquote>
+<p>Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.</p>
+</blockquote>
+<p>An API for tracking player data and game runs.</p>
+<h1 id="authentication">Authentication</h1>
+<ul>
+<li>HTTP Authentication, scheme: basic </li>
+</ul>
+<h1 id="player-and-run-tracker-api-default">Default</h1>
+
+<h2 id="check-name">Check Name</h2>
+<p><a id="opIdcheck_name_players_check_name_post"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X POST /players/check-name \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('/players/check-name', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>POST /players/check-name</code></p>
+<p>Checks if a player name is already taken. This is useful for
+real-time validation in the user interface.</p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;player_name&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="check-name-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemanamecheckrequest">NameCheckRequest</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;exists&quot;: true,
+  &quot;message&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="check-name-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemanamecheckresponse">NameCheckResponse</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="generate-name">Generate Name</h2>
+<p><a id="opIdgenerate_name_players_generate_name_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /players/generate-name \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/players/generate-name', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /players/generate-name</code></p>
+<p>Generates a unique, random player name that is not already in use.</p>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;player_name&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="generate-name-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemageneratenameresponse">GenerateNameResponse</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="start-run">Start Run</h2>
+<p><a id="opIdstart_run_runs_start_post"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X POST /runs/start \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('/runs/start', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>POST /runs/start</code></p>
+<p>Starts a new game run. This endpoint handles both new and existing players.
+If <code>create_new_player</code> is true, a new player is created. Otherwise,
+the existing player is authenticated.</p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;player_name&quot;: &quot;string&quot;,
+  &quot;password&quot;: &quot;string&quot;,
+  &quot;map_id&quot;: &quot;string&quot;,
+  &quot;create_new_player&quot;: false
+}
+</code></pre>
+<h3 id="start-run-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemarunstart">RunStart</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;player_id&quot;: 0,
+  &quot;run_id&quot;: 0
+}
+</code></pre>
+<h3 id="start-run-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemarunstartresponse">RunStartResponse</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="get-players">Get Players</h2>
+<p><a id="opIdget_players_players_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /players \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/players', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /players</code></p>
+<p>Retrieves a list of all players with pagination.</p>
+<h3 id="get-players-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>skip</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+  }
+]
+</code></pre>
+<h3 id="get-players-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-players-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+<p><em>Response Get Players Players Get</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Response Get Players Players Get</td>
+<td>[<a href="#schemaplayer">Player</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>[Schema for representing a player, including their ID and creation date.]</td>
+</tr>
+<tr>
+<td>» Player</td>
+<td><a href="#schemaplayer">Player</a></td>
+<td>false</td>
+<td>none</td>
+<td>Schema for representing a player, including their ID and creation date.</td>
+</tr>
+<tr>
+<td>»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="create-player">Create Player</h2>
+<p><a id="opIdcreate_player_players_post"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X POST /players \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('/players', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>POST /players</code></p>
+<p>Creates a new player with a randomly generated password.
+Returns the new player's details, including the password.</p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="create-player-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemaplayercreate">PlayerCreate</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>201 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;password&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="create-player-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>201</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>Successful Response</td>
+<td><a href="#schemaplayercreateresponse">PlayerCreateResponse</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="read-player">Read Player</h2>
+<p><a id="opIdread_player_players__player_id__get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /players/{player_id} \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/players/{player_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /players/{player_id}</code></p>
+<p>Retrieves a single player by their ID.</p>
+<h3 id="read-player-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+}
+</code></pre>
+<h3 id="read-player-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemaplayer">Player</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="delete-player">Delete Player</h2>
+<p><a id="opIddelete_player_players__player_id__delete"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X DELETE /players/{player_id} \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.delete('/players/{player_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>DELETE /players/{player_id}</code></p>
+<p>Deletes a player and all of their associated data.</p>
+<h3 id="delete-player-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>422 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;detail&quot;: [
+    {
+      &quot;loc&quot;: [
+        &quot;string&quot;
+      ],
+      &quot;msg&quot;: &quot;string&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="delete-player-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>Successful Response</td>
+<td>None</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="get-runs">Get Runs</h2>
+<p><a id="opIdget_runs_runs_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /runs \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/runs', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /runs</code></p>
+<p>Retrieves a list of all runs with pagination.</p>
+<h3 id="get-runs-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>skip</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">[
+  {
+    &quot;player_id&quot;: 0,
+    &quot;map_id&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;player&quot;: {
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;id&quot;: 0,
+      &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+    },
+    &quot;started_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+    &quot;status&quot;: &quot;in_progress&quot;,
+    &quot;duration_seconds&quot;: 0,
+    &quot;level&quot;: 0,
+    &quot;xp&quot;: 0,
+    &quot;kills_total&quot;: 0,
+    &quot;upgrades&quot;: {
+      &quot;property1&quot;: 0,
+      &quot;property2&quot;: 0
+    },
+    &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+    &quot;cause_of_death&quot;: &quot;string&quot;
+  }
+]
+</code></pre>
+<h3 id="get-runs-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-runs-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+<p><em>Response Get Runs Runs Get</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Response Get Runs Runs Get</td>
+<td>[<a href="#schemarun">Run</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>[Schema for representing a run, including all its details.]</td>
+</tr>
+<tr>
+<td>» Run</td>
+<td><a href="#schemarun">Run</a></td>
+<td>false</td>
+<td>none</td>
+<td>Schema for representing a run, including all its details.</td>
+</tr>
+<tr>
+<td>»» player_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» map_id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» player</td>
+<td><a href="#schemaplayer">Player</a></td>
+<td>true</td>
+<td>none</td>
+<td>Schema for representing a player, including their ID and creation date.</td>
+</tr>
+<tr>
+<td>»»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» started_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» status</td>
+<td><a href="#schemarunstatus">RunStatus</a></td>
+<td>true</td>
+<td>none</td>
+<td>An enumeration for the possible statuses of a run.</td>
+</tr>
+<tr>
+<td>»» duration_seconds</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» level</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» xp</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» kills_total</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» upgrades</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>anyOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»»» <strong>additionalProperties</strong></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>or</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>continued</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»» ended_at</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>anyOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>string(date-time)</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>or</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>continued</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»» cause_of_death</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>anyOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>or</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>in_progress</td>
+</tr>
+<tr>
+<td>status</td>
+<td>died</td>
+</tr>
+<tr>
+<td>status</td>
+<td>completed</td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="get-run">Get Run</h2>
+<p><a id="opIdget_run_runs__run_id__get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /runs/{run_id} \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/runs/{run_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /runs/{run_id}</code></p>
+<p>Retrieves a single run by its ID.</p>
+<h3 id="get-run-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>run_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;player_id&quot;: 0,
+  &quot;map_id&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;player&quot;: {
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+  },
+  &quot;started_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;status&quot;: &quot;in_progress&quot;,
+  &quot;duration_seconds&quot;: 0,
+  &quot;level&quot;: 0,
+  &quot;xp&quot;: 0,
+  &quot;kills_total&quot;: 0,
+  &quot;upgrades&quot;: {
+    &quot;property1&quot;: 0,
+    &quot;property2&quot;: 0
+  },
+  &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;cause_of_death&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="get-run-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemarun">Run</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="update-run">Update Run</h2>
+<p><a id="opIdupdate_run_runs__run_id__patch"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X PATCH /runs/{run_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.patch('/runs/{run_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>PATCH /runs/{run_id}</code></p>
+<p>Updates the details of a specific run, such as duration, kills, and status.
+This is the primary endpoint for updating a run's progress.</p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;duration_seconds&quot;: 0,
+  &quot;kills_total&quot;: 0,
+  &quot;level&quot;: 0,
+  &quot;xp&quot;: 0,
+  &quot;upgrades&quot;: {
+    &quot;property1&quot;: 0,
+    &quot;property2&quot;: 0
+  },
+  &quot;status&quot;: &quot;in_progress&quot;,
+  &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;cause_of_death&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="update-run-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>run_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemarunupdate">RunUpdate</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;player_id&quot;: 0,
+  &quot;map_id&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;player&quot;: {
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+  },
+  &quot;started_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;status&quot;: &quot;in_progress&quot;,
+  &quot;duration_seconds&quot;: 0,
+  &quot;level&quot;: 0,
+  &quot;xp&quot;: 0,
+  &quot;kills_total&quot;: 0,
+  &quot;upgrades&quot;: {
+    &quot;property1&quot;: 0,
+    &quot;property2&quot;: 0
+  },
+  &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;cause_of_death&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="update-run-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemarun">Run</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="delete-run">Delete Run</h2>
+<p><a id="opIddelete_run_runs__run_id__delete"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X DELETE /runs/{run_id} \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.delete('/runs/{run_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>DELETE /runs/{run_id}</code></p>
+<p>Deletes a single run and its associated events.</p>
+<h3 id="delete-run-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>run_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">null
+</code></pre>
+<h3 id="delete-run-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="delete-run-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="create-run-event">Create Run Event</h2>
+<p><a id="opIdcreate_run_event_runs__run_id__events_post"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X POST /runs/{run_id}/events \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('/runs/{run_id}/events', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>POST /runs/{run_id}/events</code></p>
+<p>Creates a new event associated with a specific run.</p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;event_type&quot;: &quot;string&quot;,
+  &quot;value&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="create-run-event-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>run_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemaruneventcreate">RunEventCreate</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;event_type&quot;: &quot;string&quot;,
+  &quot;value&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;run_id&quot;: 0,
+  &quot;timestamp&quot;: &quot;2019-08-24T14:15:22Z&quot;
+}
+</code></pre>
+<h3 id="create-run-event-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemarunevent">RunEvent</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="get-run-events">Get Run Events</h2>
+<p><a id="opIdget_run_events_runs__run_id__events_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /runs/{run_id}/events \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/runs/{run_id}/events', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /runs/{run_id}/events</code></p>
+<p>Retrieves all events for a specific run.</p>
+<h3 id="get-run-events-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>run_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">[
+  {
+    &quot;event_type&quot;: &quot;string&quot;,
+    &quot;value&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;run_id&quot;: 0,
+    &quot;timestamp&quot;: &quot;2019-08-24T14:15:22Z&quot;
+  }
+]
+</code></pre>
+<h3 id="get-run-events-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-run-events-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+<p><em>Response Get Run Events Runs  Run Id  Events Get</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Response Get Run Events Runs  Run Id  Events Get</td>
+<td>[<a href="#schemarunevent">RunEvent</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>[Schema for representing a run event, including its ID and timestamp.]</td>
+</tr>
+<tr>
+<td>» RunEvent</td>
+<td><a href="#schemarunevent">RunEvent</a></td>
+<td>false</td>
+<td>none</td>
+<td>Schema for representing a run event, including its ID and timestamp.</td>
+</tr>
+<tr>
+<td>»» event_type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» value</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>anyOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>or</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>continued</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» run_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» timestamp</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="get-leaderboard">Get Leaderboard</h2>
+<p><a id="opIdget_leaderboard_analytics_leaderboard_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /analytics/leaderboard \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/analytics/leaderboard', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /analytics/leaderboard</code></p>
+<p>Retrieves the top 10 runs for the leaderboard, sorted by duration.</p>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">[
+  {
+    &quot;player_id&quot;: 0,
+    &quot;run_id&quot;: 0,
+    &quot;player_name&quot;: &quot;string&quot;,
+    &quot;duration_seconds&quot;: 0,
+    &quot;total_kills&quot;: 0
+  }
+]
+</code></pre>
+<h3 id="get-leaderboard-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-leaderboard-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+<p><em>Response Get Leaderboard Analytics Leaderboard Get</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Response Get Leaderboard Analytics Leaderboard Get</td>
+<td>[<a href="#schemarunleaderboard">RunLeaderboard</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>[Schema for a single entry in the leaderboard.]</td>
+</tr>
+<tr>
+<td>» RunLeaderboard</td>
+<td><a href="#schemarunleaderboard">RunLeaderboard</a></td>
+<td>false</td>
+<td>none</td>
+<td>Schema for a single entry in the leaderboard.</td>
+</tr>
+<tr>
+<td>»» player_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» run_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» player_name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» duration_seconds</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» total_kills</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="get-players-summary">Get Players Summary</h2>
+<p><a id="opIdget_players_summary_analytics_players_summary_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /analytics/players-summary \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/analytics/players-summary', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /analytics/players-summary</code></p>
+<p>Provides a summary of all players, including their total number of runs
+and best run time. Can be filtered by a search term.</p>
+<h3 id="get-players-summary-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search</td>
+<td>query</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+    &quot;total_runs&quot;: 0,
+    &quot;best_run_time&quot;: 0
+  }
+]
+</code></pre>
+<h3 id="get-players-summary-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-players-summary-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+<p><em>Response Get Players Summary Analytics Players Summary Get</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Response Get Players Summary Analytics Players Summary Get</td>
+<td>[<a href="#schemaplayersummary">PlayerSummary</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>[Schema for a player summary, which includes their total number of runs<br>and their best run time.]</td>
+</tr>
+<tr>
+<td>» PlayerSummary</td>
+<td><a href="#schemaplayersummary">PlayerSummary</a></td>
+<td>false</td>
+<td>none</td>
+<td>Schema for a player summary, which includes their total number of runs<br>and their best run time.</td>
+</tr>
+<tr>
+<td>»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» total_runs</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» best_run_time</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>anyOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>or</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="view-player-stats">View Player Stats</h2>
+<p><a id="opIdview_player_stats_analytics_view_player_stats__player_id__get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /analytics/view_player_stats/{player_id} \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/analytics/view_player_stats/{player_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /analytics/view_player_stats/{player_id}</code></p>
+<p>Retrieves detailed statistics for a single player, such as total runs,
+average survival time, and total kills.</p>
+<h3 id="view-player-stats-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;player_name&quot;: &quot;string&quot;,
+  &quot;number_of_runs&quot;: 0,
+  &quot;total_time_played&quot;: 0,
+  &quot;average_time_survived&quot;: 0,
+  &quot;longest_run&quot;: 0,
+  &quot;favourite_upgrade&quot;: &quot;string&quot;,
+  &quot;total_monsters_slain&quot;: 0
+}
+</code></pre>
+<h3 id="view-player-stats-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemaplayerstats">PlayerStats</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="get-player-runs">Get Player Runs</h2>
+<p><a id="opIdget_player_runs_players__player_id__runs_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /players/{player_id}/runs \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/players/{player_id}/runs', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /players/{player_id}/runs</code></p>
+<p>Retrieves all runs for a specific player.</p>
+<h3 id="get-player-runs-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">[
+  {
+    &quot;player_id&quot;: 0,
+    &quot;map_id&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;player&quot;: {
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;id&quot;: 0,
+      &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+    },
+    &quot;started_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+    &quot;status&quot;: &quot;in_progress&quot;,
+    &quot;duration_seconds&quot;: 0,
+    &quot;level&quot;: 0,
+    &quot;xp&quot;: 0,
+    &quot;kills_total&quot;: 0,
+    &quot;upgrades&quot;: {
+      &quot;property1&quot;: 0,
+      &quot;property2&quot;: 0
+    },
+    &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+    &quot;cause_of_death&quot;: &quot;string&quot;
+  }
+]
+</code></pre>
+<h3 id="get-player-runs-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-player-runs-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+<p><em>Response Get Player Runs Players  Player Id  Runs Get</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Response Get Player Runs Players  Player Id  Runs Get</td>
+<td>[<a href="#schemarun">Run</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>[Schema for representing a run, including all its details.]</td>
+</tr>
+<tr>
+<td>» Run</td>
+<td><a href="#schemarun">Run</a></td>
+<td>false</td>
+<td>none</td>
+<td>Schema for representing a run, including all its details.</td>
+</tr>
+<tr>
+<td>»» player_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» map_id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» player</td>
+<td><a href="#schemaplayer">Player</a></td>
+<td>true</td>
+<td>none</td>
+<td>Schema for representing a player, including their ID and creation date.</td>
+</tr>
+<tr>
+<td>»»» name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» started_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» status</td>
+<td><a href="#schemarunstatus">RunStatus</a></td>
+<td>true</td>
+<td>none</td>
+<td>An enumeration for the possible statuses of a run.</td>
+</tr>
+<tr>
+<td>»» duration_seconds</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» level</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» xp</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» kills_total</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» upgrades</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>anyOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»»» <strong>additionalProperties</strong></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>or</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>continued</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»» ended_at</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>anyOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>string(date-time)</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>or</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>continued</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»» cause_of_death</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>anyOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>or</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values_1">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>in_progress</td>
+</tr>
+<tr>
+<td>status</td>
+<td>died</td>
+</tr>
+<tr>
+<td>status</td>
+<td>completed</td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="admin-login">Admin Login</h2>
+<p><a id="opIdadmin_login_admin_login_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /admin/login \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/admin/login', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /admin/login</code></p>
+<p>Verifies admin credentials. This endpoint is protected and requires
+Basic Authentication.</p>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">null
+</code></pre>
+<h3 id="admin-login-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="admin-login-responseschema">Response Schema</h3>
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBasic
+</aside>
+
+<h2 id="admin-update-player-name">Admin Update Player Name</h2>
+<p><a id="opIdadmin_update_player_name_admin_players__player_id__patch"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X PATCH /admin/players/{player_id} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.patch('/admin/players/{player_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>PATCH /admin/players/{player_id}</code></p>
+<p>Admin-only endpoint to update a player's name.</p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="admin-update-player-name-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemaplayernameupdate">PlayerNameUpdate</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+}
+</code></pre>
+<h3 id="admin-update-player-name-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemaplayer">Player</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBasic
+</aside>
+
+<h2 id="admin-delete-player">Admin Delete Player</h2>
+<p><a id="opIdadmin_delete_player_admin_players__player_id__delete"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X DELETE /admin/players/{player_id} \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.delete('/admin/players/{player_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>DELETE /admin/players/{player_id}</code></p>
+<p>Admin-only endpoint to delete a player and all their associated runs.</p>
+<h3 id="admin-delete-player-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>422 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;detail&quot;: [
+    {
+      &quot;loc&quot;: [
+        &quot;string&quot;
+      ],
+      &quot;msg&quot;: &quot;string&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="admin-delete-player-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>Successful Response</td>
+<td>None</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBasic
+</aside>
+
+<h2 id="admin-delete-run">Admin Delete Run</h2>
+<p><a id="opIdadmin_delete_run_admin_runs__run_id__delete"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X DELETE /admin/runs/{run_id} \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.delete('/admin/runs/{run_id}', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>DELETE /admin/runs/{run_id}</code></p>
+<p>Admin-only endpoint to delete a specific run.</p>
+<h3 id="admin-delete-run-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>run_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>422 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;detail&quot;: [
+    {
+      &quot;loc&quot;: [
+        &quot;string&quot;
+      ],
+      &quot;msg&quot;: &quot;string&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="admin-delete-run-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>204</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.5">No Content</a></td>
+<td>Successful Response</td>
+<td>None</td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+HTTPBasic
+</aside>
+
+<h2 id="test-endpoint-one">Test Endpoint One</h2>
+<p><a id="opIdtest_endpoint_one_test1_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /test1 \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/test1', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /test1</code></p>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">null
+</code></pre>
+<h3 id="test-endpoint-one-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-endpoint-one-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="test-endpoint-two">Test Endpoint Two</h2>
+<p><a id="opIdtest_endpoint_two_test2_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /test2 \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/test2', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /test2</code></p>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">null
+</code></pre>
+<h3 id="test-endpoint-two-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-endpoint-two-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h2 id="test-endpoint-three">Test Endpoint Three</h2>
+<p><a id="opIdtest_endpoint_three_test3_get"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X GET /test3 \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('/test3', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>GET /test3</code></p>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">null
+</code></pre>
+<h3 id="test-endpoint-three-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-endpoint-three-responseschema">Response Schema</h3>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="schemas">Schemas</h1>
+<h2 id="tocS_GenerateNameResponse">GenerateNameResponse</h2>
+<!-- backwards compatibility -->
+<p><a id="schemageneratenameresponse"></a>
+<a id="schema_GenerateNameResponse"></a>
+<a id="tocSgeneratenameresponse"></a>
+<a id="tocsgeneratenameresponse"></a></p>
+<pre><code class="language-json">{
+  &quot;player_name&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>GenerateNameResponse</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_HTTPValidationError">HTTPValidationError</h2>
+<!-- backwards compatibility -->
+<p><a id="schemahttpvalidationerror"></a>
+<a id="schema_HTTPValidationError"></a>
+<a id="tocShttpvalidationerror"></a>
+<a id="tocshttpvalidationerror"></a></p>
+<pre><code class="language-json">{
+  &quot;detail&quot;: [
+    {
+      &quot;loc&quot;: [
+        &quot;string&quot;
+      ],
+      &quot;msg&quot;: &quot;string&quot;,
+      &quot;type&quot;: &quot;string&quot;
+    }
+  ]
+}
+
+</code></pre>
+<p>HTTPValidationError</p>
+<h3 id="properties_1">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>detail</td>
+<td>[<a href="#schemavalidationerror">ValidationError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_NameCheckRequest">NameCheckRequest</h2>
+<!-- backwards compatibility -->
+<p><a id="schemanamecheckrequest"></a>
+<a id="schema_NameCheckRequest"></a>
+<a id="tocSnamecheckrequest"></a>
+<a id="tocsnamecheckrequest"></a></p>
+<pre><code class="language-json">{
+  &quot;player_name&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>NameCheckRequest</p>
+<h3 id="properties_2">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_NameCheckResponse">NameCheckResponse</h2>
+<!-- backwards compatibility -->
+<p><a id="schemanamecheckresponse"></a>
+<a id="schema_NameCheckResponse"></a>
+<a id="tocSnamecheckresponse"></a>
+<a id="tocsnamecheckresponse"></a></p>
+<pre><code class="language-json">{
+  &quot;exists&quot;: true,
+  &quot;message&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>NameCheckResponse</p>
+<h3 id="properties_3">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exists</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_Player">Player</h2>
+<!-- backwards compatibility -->
+<p><a id="schemaplayer"></a>
+<a id="schema_Player"></a>
+<a id="tocSplayer"></a>
+<a id="tocsplayer"></a></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+}
+
+</code></pre>
+<p>Player</p>
+<h3 id="properties_4">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_PlayerCreate">PlayerCreate</h2>
+<!-- backwards compatibility -->
+<p><a id="schemaplayercreate"></a>
+<a id="schema_PlayerCreate"></a>
+<a id="tocSplayercreate"></a>
+<a id="tocsplayercreate"></a></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>PlayerCreate</p>
+<h3 id="properties_5">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_PlayerCreateResponse">PlayerCreateResponse</h2>
+<!-- backwards compatibility -->
+<p><a id="schemaplayercreateresponse"></a>
+<a id="schema_PlayerCreateResponse"></a>
+<a id="tocSplayercreateresponse"></a>
+<a id="tocsplayercreateresponse"></a></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;password&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>PlayerCreateResponse</p>
+<h3 id="properties_6">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_PlayerNameUpdate">PlayerNameUpdate</h2>
+<!-- backwards compatibility -->
+<p><a id="schemaplayernameupdate"></a>
+<a id="schema_PlayerNameUpdate"></a>
+<a id="tocSplayernameupdate"></a>
+<a id="tocsplayernameupdate"></a></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>PlayerNameUpdate</p>
+<h3 id="properties_7">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_PlayerStats">PlayerStats</h2>
+<!-- backwards compatibility -->
+<p><a id="schemaplayerstats"></a>
+<a id="schema_PlayerStats"></a>
+<a id="tocSplayerstats"></a>
+<a id="tocsplayerstats"></a></p>
+<pre><code class="language-json">{
+  &quot;player_name&quot;: &quot;string&quot;,
+  &quot;number_of_runs&quot;: 0,
+  &quot;total_time_played&quot;: 0,
+  &quot;average_time_survived&quot;: 0,
+  &quot;longest_run&quot;: 0,
+  &quot;favourite_upgrade&quot;: &quot;string&quot;,
+  &quot;total_monsters_slain&quot;: 0
+}
+
+</code></pre>
+<p>PlayerStats</p>
+<h3 id="properties_8">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>number_of_runs</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>total_time_played</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>average_time_survived</td>
+<td>number</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>longest_run</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>favourite_upgrade</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>total_monsters_slain</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_PlayerSummary">PlayerSummary</h2>
+<!-- backwards compatibility -->
+<p><a id="schemaplayersummary"></a>
+<a id="schema_PlayerSummary"></a>
+<a id="tocSplayersummary"></a>
+<a id="tocsplayersummary"></a></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;total_runs&quot;: 0,
+  &quot;best_run_time&quot;: 0
+}
+
+</code></pre>
+<p>PlayerSummary</p>
+<h3 id="properties_9">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>total_runs</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>best_run_time</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_Run">Run</h2>
+<!-- backwards compatibility -->
+<p><a id="schemarun"></a>
+<a id="schema_Run"></a>
+<a id="tocSrun"></a>
+<a id="tocsrun"></a></p>
+<pre><code class="language-json">{
+  &quot;player_id&quot;: 0,
+  &quot;map_id&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;player&quot;: {
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+  },
+  &quot;started_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;status&quot;: &quot;in_progress&quot;,
+  &quot;duration_seconds&quot;: 0,
+  &quot;level&quot;: 0,
+  &quot;xp&quot;: 0,
+  &quot;kills_total&quot;: 0,
+  &quot;upgrades&quot;: {
+    &quot;property1&quot;: 0,
+    &quot;property2&quot;: 0
+  },
+  &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;cause_of_death&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>Run</p>
+<h3 id="properties_10">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>map_id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>player</td>
+<td><a href="#schemaplayer">Player</a></td>
+<td>true</td>
+<td>none</td>
+<td>Schema for representing a player, including their ID and creation date.</td>
+</tr>
+<tr>
+<td>started_at</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>status</td>
+<td><a href="#schemarunstatus">RunStatus</a></td>
+<td>true</td>
+<td>none</td>
+<td>An enumeration for the possible statuses of a run.</td>
+</tr>
+<tr>
+<td>duration_seconds</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>level</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>xp</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>kills_total</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>upgrades</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» <strong>additionalProperties</strong></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ended_at</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string(date-time)</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cause_of_death</td>
+<td>any</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_RunEvent">RunEvent</h2>
+<!-- backwards compatibility -->
+<p><a id="schemarunevent"></a>
+<a id="schema_RunEvent"></a>
+<a id="tocSrunevent"></a>
+<a id="tocsrunevent"></a></p>
+<pre><code class="language-json">{
+  &quot;event_type&quot;: &quot;string&quot;,
+  &quot;value&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;run_id&quot;: 0,
+  &quot;timestamp&quot;: &quot;2019-08-24T14:15:22Z&quot;
+}
+
+</code></pre>
+<p>RunEvent</p>
+<h3 id="properties_11">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>value</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>run_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>string(date-time)</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_RunEventCreate">RunEventCreate</h2>
+<!-- backwards compatibility -->
+<p><a id="schemaruneventcreate"></a>
+<a id="schema_RunEventCreate"></a>
+<a id="tocSruneventcreate"></a>
+<a id="tocsruneventcreate"></a></p>
+<pre><code class="language-json">{
+  &quot;event_type&quot;: &quot;string&quot;,
+  &quot;value&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>RunEventCreate</p>
+<h3 id="properties_12">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event_type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>value</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_RunLeaderboard">RunLeaderboard</h2>
+<!-- backwards compatibility -->
+<p><a id="schemarunleaderboard"></a>
+<a id="schema_RunLeaderboard"></a>
+<a id="tocSrunleaderboard"></a>
+<a id="tocsrunleaderboard"></a></p>
+<pre><code class="language-json">{
+  &quot;player_id&quot;: 0,
+  &quot;run_id&quot;: 0,
+  &quot;player_name&quot;: &quot;string&quot;,
+  &quot;duration_seconds&quot;: 0,
+  &quot;total_kills&quot;: 0
+}
+
+</code></pre>
+<p>RunLeaderboard</p>
+<h3 id="properties_13">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>run_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>player_name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>duration_seconds</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>total_kills</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_RunStart">RunStart</h2>
+<!-- backwards compatibility -->
+<p><a id="schemarunstart"></a>
+<a id="schema_RunStart"></a>
+<a id="tocSrunstart"></a>
+<a id="tocsrunstart"></a></p>
+<pre><code class="language-json">{
+  &quot;player_name&quot;: &quot;string&quot;,
+  &quot;password&quot;: &quot;string&quot;,
+  &quot;map_id&quot;: &quot;string&quot;,
+  &quot;create_new_player&quot;: false
+}
+
+</code></pre>
+<p>RunStart</p>
+<h3 id="properties_14">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>password</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>map_id</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>create_new_player</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_RunStartResponse">RunStartResponse</h2>
+<!-- backwards compatibility -->
+<p><a id="schemarunstartresponse"></a>
+<a id="schema_RunStartResponse"></a>
+<a id="tocSrunstartresponse"></a>
+<a id="tocsrunstartresponse"></a></p>
+<pre><code class="language-json">{
+  &quot;player_id&quot;: 0,
+  &quot;run_id&quot;: 0
+}
+
+</code></pre>
+<p>RunStartResponse</p>
+<h3 id="properties_15">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>player_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>run_id</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_RunStatus">RunStatus</h2>
+<!-- backwards compatibility -->
+<p><a id="schemarunstatus"></a>
+<a id="schema_RunStatus"></a>
+<a id="tocSrunstatus"></a>
+<a id="tocsrunstatus"></a></p>
+<pre><code class="language-json">&quot;in_progress&quot;
+
+</code></pre>
+<p>RunStatus</p>
+<h3 id="properties_16">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RunStatus</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>An enumeration for the possible statuses of a run.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values_2">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RunStatus</td>
+<td>in_progress</td>
+</tr>
+<tr>
+<td>RunStatus</td>
+<td>died</td>
+</tr>
+<tr>
+<td>RunStatus</td>
+<td>completed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_RunUpdate">RunUpdate</h2>
+<!-- backwards compatibility -->
+<p><a id="schemarunupdate"></a>
+<a id="schema_RunUpdate"></a>
+<a id="tocSrunupdate"></a>
+<a id="tocsrunupdate"></a></p>
+<pre><code class="language-json">{
+  &quot;duration_seconds&quot;: 0,
+  &quot;kills_total&quot;: 0,
+  &quot;level&quot;: 0,
+  &quot;xp&quot;: 0,
+  &quot;upgrades&quot;: {
+    &quot;property1&quot;: 0,
+    &quot;property2&quot;: 0
+  },
+  &quot;status&quot;: &quot;in_progress&quot;,
+  &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;cause_of_death&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>RunUpdate</p>
+<h3 id="properties_17">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>duration_seconds</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kills_total</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>level</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>xp</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>upgrades</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» <strong>additionalProperties</strong></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td><a href="#schemarunstatus">RunStatus</a></td>
+<td>false</td>
+<td>none</td>
+<td>An enumeration for the possible statuses of a run.</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ended_at</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string(date-time)</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cause_of_death</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>null</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocS_ValidationError">ValidationError</h2>
+<!-- backwards compatibility -->
+<p><a id="schemavalidationerror"></a>
+<a id="schema_ValidationError"></a>
+<a id="tocSvalidationerror"></a>
+<a id="tocsvalidationerror"></a></p>
+<pre><code class="language-json">{
+  &quot;loc&quot;: [
+    &quot;string&quot;
+  ],
+  &quot;msg&quot;: &quot;string&quot;,
+  &quot;type&quot;: &quot;string&quot;
+}
+
+</code></pre>
+<p>ValidationError</p>
+<h3 id="properties_18">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>loc</td>
+<td>[anyOf]</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>anyOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>or</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>continued</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

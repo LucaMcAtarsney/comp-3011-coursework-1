@@ -1,0 +1,15 @@
+site_name: Survival Video Game API Docs
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - API Reference: api.md
+plugins:
+  - search
+  - with-pdf:
+      author: API Docs Generator
+      cover_title: Survival Video Game with API Integration
+      output_path: ../api-documentation.pdf
+      
+markdown_extensions:
+  - admonition
