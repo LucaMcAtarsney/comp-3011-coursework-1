@@ -1,10 +1,10 @@
-"""
-Name pool utility for generating random player names
-"""
+# This file contains a utility for generating unique, random player names.
+# It combines adjectives and nouns to create memorable and distinct names.
+
 import random
 from typing import List
 
-# Pool of random names combining adjectives and nouns
+# A pool of adjectives and nouns to be combined for name generation.
 ADJECTIVES = [
     "Swift", "Brave", "Mighty", "Silent", "Dark", "Mystic", "Thunder", "Shadow",
     "Frost", "Fire", "Storm", "Iron", "Golden", "Silver", "Crystal", "Wild",
@@ -23,7 +23,7 @@ NOUNS = [
 
 def generate_random_name() -> str:
     """
-    Generate a random name by combining an adjective and a noun
+    Generates a single random name by combining an adjective and a noun.
     """
     adjective = random.choice(ADJECTIVES)
     noun = random.choice(NOUNS)
@@ -31,24 +31,23 @@ def generate_random_name() -> str:
 
 def generate_unique_name(existing_names: List[str], max_attempts: int = 100) -> str:
     """
-    Generate a unique random name that doesn't exist in the provided list
+    Generates a unique random name that is not already in the provided list.
+    If a unique name cannot be found after a certain number of attempts,
+    it appends a number to ensure uniqueness.
     
     Args:
-        existing_names: List of names already in use
-        max_attempts: Maximum number of attempts to generate a unique name
+        existing_names: A list of names that are already in use.
+        max_attempts: The maximum number of times to try generating a unique name.
     
     Returns:
-        A unique random name
-    
-    Raises:
-        ValueError: If unable to generate a unique name after max_attempts
+        A unique random name as a string.
     """
     for _ in range(max_attempts):
         name = generate_random_name()
         if name not in existing_names:
             return name
     
-    # If we couldn't find a unique name, append a number
+    # If all attempts fail, append a number to ensure uniqueness.
     base_name = generate_random_name()
     counter = 1
     while f"{base_name}{counter}" in existing_names:
@@ -57,6 +56,6 @@ def generate_unique_name(existing_names: List[str], max_attempts: int = 100) -> 
 
 def get_available_name_count() -> int:
     """
-    Calculate the total number of possible name combinations
+    Calculates the total number of unique name combinations available.
     """
     return len(ADJECTIVES) * len(NOUNS)
