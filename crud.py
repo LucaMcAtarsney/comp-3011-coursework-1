@@ -187,7 +187,8 @@ def get_player_stats(db: Session, player_id: int):
     all_upgrades = []
     for run in runs:
         if run.upgrades:
-            all_upgrades.extend(run.upgrades.keys())
+            for upgrade, level in run.upgrades.items():
+                all_upgrades.extend([upgrade] * level)
     
     favourite_upgrade = None
     if all_upgrades:
