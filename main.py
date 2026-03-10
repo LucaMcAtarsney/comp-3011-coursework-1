@@ -293,11 +293,12 @@ def admin_delete_player(
 # These endpoints are left for reference but are either replaced by more
 # comprehensive endpoints or are no longer in use.
 
-# @app.post("/runs/{run_id}/update", response_model=schemas.Run)
-# def update_run_from_game(run_id: int, run_update: schemas.RunUpdate, db: Session = Depends(get_db)):
-#     db_run = crud.get_run(db, run_id=run_id)
-#     if not db_run:
-#         raise HTTPException(status_code=404, detail="Run not found")
+@app.post("/runs/{run_id}/update", response_model=schemas.Run)
+def update_run_from_game(run_id: int, run_update: schemas.RunUpdate, db: Session = Depends(get_db)):
+    db_run = crud.get_run(db, run_id=run_id)
+    if not db_run:
+        raise HTTPException(status_code=404, detail="Run not found")
+    return crud.update_run(db=db, run_id=run_id, run_update=run_update)
     
 #     updated_run = crud.update_run_stats(db=db, run_id=run_id, run_update=run_update)
 #     if not updated_run:

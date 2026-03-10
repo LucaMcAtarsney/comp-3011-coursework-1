@@ -36,7 +36,15 @@ The project is organized into several key modules:
 -   `auth.py`: Contains all authentication logic, including password hashing/verification and admin authentication.
 -   `tests/`: Contains all the automated tests for the application.
 
-## Setup and Installation
+## Admin Login
+For the sake of demonstration the admin login is -
+username: admin,
+password: admin
+
+## Setup and Installation (DEPLOYED)
+An interactive version of the project is available at `https://pentgon.com/projects/comp-3011`. This godot build uses `"https://comp-3011-coursework-1.onrender.com"` as the base url as opposed to `http://127.0.0.1:8000` when running locally.
+
+## Setup and Installation (LOCAL)
 
 Follow these steps to set up and run the project locally.
 
@@ -84,7 +92,7 @@ To run the development server with live reloading, use `uvicorn`:
 uvicorn main:app --reload
 ```
 
-The API will be available at `http://127.0.0.1:8000`. You can access the interactive API documentation (Swagger UI) at `http://127.0.0.1:8000/docs`.
+The API will be available at `http://127.0.0.1:8000` if ran locally. You can access the interactive API documentation (Swagger UI) at `http://127.0.0.1:8000/docs`.
 
 ## Running Tests
 
