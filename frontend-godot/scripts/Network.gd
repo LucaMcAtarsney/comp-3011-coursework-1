@@ -109,16 +109,16 @@ func call_run_update()->void:
 	if current_run_id==-1:
 		push_error("Invalid run_id. Cannot update run.")
 		return
-	var body_data:Dictionary={"time_survived":global.time_survived,"monsters_slain":global.monsters_slain,"xp":global.xp,"upgrades":global.upgrades,"level":global.level}
-	_request_json("/runs/%s/update"%str(current_run_id),HTTPClient.METHOD_POST,body_data)
+	var body_data:Dictionary={"duration_seconds":global.time_survived,"kills_total":global.monsters_slain,"xp":global.xp,"upgrades":global.upgrades,"level":global.level}
+	_request_json("/runs/%s/update"%str(current_run_id),HTTPClient.METHOD_PATCH,body_data)
 
 func call_run_end()->void:
 	last_request_type="update_run"
 	if current_run_id==-1:
 		push_error("Invalid run_id. Cannot end run.")
 		return
-	var body_data:Dictionary={"time_survived":global.time_survived,"monsters_slain":global.monsters_slain,"xp":global.xp,"upgrades":global.upgrades,"level":global.level,"status":"completed","cause_of_death":global.cause_of_death}
-	_request_json("/runs/%s/update"%str(current_run_id),HTTPClient.METHOD_POST,body_data)
+	var body_data:Dictionary={"duration_seconds":global.time_survived,"kills_total":global.monsters_slain,"xp":global.xp,"upgrades":global.upgrades,"level":global.level,"status":"completed","cause_of_death":global.cause_of_death}
+	_request_json("/runs/%s/update"%str(current_run_id),HTTPClient.METHOD_PATCH,body_data)
 
 func get_leaderboard(limit:int=10)->void:
 	last_request_type="leaderboard"
