@@ -1,0 +1,234 @@
+[gd_scene load_steps=10 format=3 uid="uid://dggowusym78cu"]
+
+[ext_resource type="Script" uid="uid://cidqc05xix7y8" path="res://scenes/admin_login.gd" id="1_gf4lb"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="2_tb7ro"]
+[ext_resource type="Shader" uid="uid://dpdgai75l0jcj" path="res://shaders/crt.gdshader" id="3_0eidl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsqcm"]
+bg_color = Color(0.250213, 0.250213, 0.250213, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hifvb"]
+content_margin_left = 15.0
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_iwrx4"]
+script/source = "extends HTTPRequest
+
+@onready var http_request = $\".\"
+@onready var main_scene = $\"..\"
+
+func _ready():
+	http_request.request_completed.connect(_on_request_completed)
+
+func call_endpoint(player_name):
+	var url = \"http://127.0.0.1:8000/test1\"
+	
+	# Make the GET request.
+	# The request method returns an error code if it fails to start.
+	var error = http_request.request(url)
+	if error != OK:
+		print(\"An error occurred in the HTTP request.\")
+
+# This function is called when the request is completed.
+func _on_request_completed(result, response_code, headers, body):
+	# The body of the response is a PackedByteArray. We need to convert it to a string.
+	var response_body_string = body.get_string_from_utf8()
+	
+	# Godot can parse the JSON string into a Dictionary.
+	var json = JSON.parse_string(response_body_string)
+
+	if json:
+		# Check if the 'message' key exists.
+		if json.has(\"message\"):
+			print(\"Response from server: \", json[\"message\"])
+			# Now you can use the message, for example, update a Label node:
+			# $YourLabel.text = json[\"message\"]
+		else:
+			print(\"JSON response did not contain 'message' key.\")
+	else:
+		print(\"Failed to parse JSON response.\")
+		print(\"Raw response: \", response_body_string)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwrx4"]
+bg_color = Color(0.250213, 0.250213, 0.250213, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwrx4"]
+shader = ExtResource("3_0eidl")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.1150000054625
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.47700001939762
+shader_parameter/distort_intensity = 0.05400000256499999
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.01000004797499998
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.5110000242725
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fsqcm"]
+
+[node name="AdminLogin" type="CanvasLayer"]
+script = ExtResource("1_gf4lb")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Enter Name" type="Label" parent="."]
+offset_left = 481.0
+offset_top = 69.0
+offset_right = 913.0
+offset_bottom = 123.0
+theme_override_fonts/font = ExtResource("2_tb7ro")
+theme_override_font_sizes/font_size = 60
+text = "Admin Login"
+
+[node name="Enter Name2" type="Label" parent="."]
+offset_left = 361.0
+offset_top = 158.0
+offset_right = 793.0
+offset_bottom = 194.0
+theme_override_fonts/font = ExtResource("2_tb7ro")
+theme_override_font_sizes/font_size = 40
+text = "Username"
+
+[node name="Enter Name3" type="Label" parent="."]
+offset_left = 361.0
+offset_top = 341.0
+offset_right = 793.0
+offset_bottom = 377.0
+theme_override_fonts/font = ExtResource("2_tb7ro")
+theme_override_font_sizes/font_size = 40
+text = "Password"
+
+[node name="Doesnt Exist" type="Label" parent="."]
+offset_left = 455.0
+offset_top = 500.0
+offset_right = 841.0
+offset_bottom = 536.0
+theme_override_colors/font_color = Color(1, 0.20999998, 0.20999998, 1)
+theme_override_fonts/font = ExtResource("2_tb7ro")
+theme_override_font_sizes/font_size = 40
+text = "Incorrect Credentials!"
+
+[node name="Start Button" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.3546875
+anchor_top = 0.7736111
+anchor_right = 0.6515625
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fsqcm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Start" type="Label" parent="Start Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38421053
+anchor_top = 0.32967034
+anchor_right = 0.5973684
+anchor_bottom = 0.6813187
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_tb7ro")
+theme_override_font_sizes/font_size = 35
+text = "Access"
+metadata/_edit_use_anchors_ = true
+
+[node name="Username" type="LineEdit" parent="."]
+offset_left = 361.0
+offset_top = 198.0
+offset_right = 906.0
+offset_bottom = 303.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_constants/caret_width = 10
+theme_override_fonts/font = ExtResource("2_tb7ro")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxFlat_hifvb")
+max_length = 16
+
+[node name="Password" type="LineEdit" parent="."]
+offset_left = 362.0
+offset_top = 379.0
+offset_right = 907.0
+offset_bottom = 484.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_constants/caret_width = 10
+theme_override_fonts/font = ExtResource("2_tb7ro")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxFlat_hifvb")
+max_length = 12
+secret = true
+secret_character = "*"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+script = SubResource("GDScript_iwrx4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Go back" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.053125
+anchor_top = 0.06527778
+anchor_right = 0.12578125
+anchor_bottom = 0.15277778
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_iwrx4")
+metadata/_edit_use_anchors_ = true
+
+[node name="back" type="Label" parent="Go back"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1505376
+anchor_top = 0.2539682
+anchor_right = 0.86021507
+anchor_bottom = 0.76190466
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_tb7ro")
+theme_override_font_sizes/font_size = 35
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[node name="CRT2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_iwrx4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_fsqcm")
+
+[connection signal="button_up" from="Start Button" to="." method="_on_start_button_button_up"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="button_up" from="Go back" to="." method="_on_go_back_button_up"]

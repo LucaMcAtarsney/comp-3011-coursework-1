@@ -1,0 +1,269 @@
+[gd_scene load_steps=18 format=3 uid="uid://d1ds8lt06ihbn"]
+
+[ext_resource type="Script" uid="uid://bm1tc3q4amtvt" path="res://scripts/analytics.gd" id="1_u4nod"]
+[ext_resource type="AudioStream" uid="uid://c1m6f8kt7qdue" path="res://underworld better.wav" id="2_u4nod"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="3_0e1b6"]
+[ext_resource type="Shader" uid="uid://dpdgai75l0jcj" path="res://shaders/crt.gdshader" id="4_8wxha"]
+[ext_resource type="Texture2D" uid="uid://ciabf3hfdjoiw" path="res://art/trophy.png" id="5_jf173"]
+[ext_resource type="Script" uid="uid://bbbcdmubou3v8" path="res://scripts/card.gd" id="5_u4nod"]
+[ext_resource type="Texture2D" uid="uid://cypp8ib5o0fgd" path="res://art/search.png" id="6_6k0ow"]
+[ext_resource type="Texture2D" uid="uid://cslo6kchq4d82" path="res://art/pc.png" id="7_qok24"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.250213, 0.250213, 0.250213, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4nod"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0e1b6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8wxha"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jf173"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6k0ow"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qok24"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ln24"]
+shader = ExtResource("4_8wxha")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.1150000054625
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.47700001939762
+shader_parameter/distort_intensity = 0.20000000298023
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/brightness = 1.2
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.5110000242725
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rtw2f"]
+
+[node name="Analytics" type="CanvasLayer"]
+script = ExtResource("1_u4nod")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(450, 314.5)
+stream = ExtResource("2_u4nod")
+pitch_scale = 0.59
+autoplay = true
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.41328126
+anchor_top = 0.059722222
+anchor_right = 0.6039063
+anchor_bottom = 0.13472222
+offset_left = -1.0
+offset_right = -1.0
+theme_override_fonts/font = ExtResource("3_0e1b6")
+theme_override_font_sizes/font_size = 60
+text = "Analytics"
+metadata/_edit_use_anchors_ = true
+
+[node name="Go back" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.7296875
+anchor_top = 0.05138889
+anchor_right = 0.8023437
+anchor_bottom = 0.1388889
+offset_left = -843.0
+offset_top = 5.0
+offset_right = -843.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+metadata/_edit_use_anchors_ = true
+
+[node name="back" type="Label" parent="Go back"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1505376
+anchor_top = 0.2539682
+anchor_right = 0.86021507
+anchor_bottom = 0.76190466
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_0e1b6")
+theme_override_font_sizes/font_size = 35
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 100)
+offset_left = 90.0
+offset_top = 153.0
+offset_right = 1210.0
+offset_bottom = 627.0
+theme_override_constants/separation = 110
+
+[node name="ColorRect5" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+color = Color(2.887845e-06, 0.63327247, 0.9520685, 1)
+script = ExtResource("5_u4nod")
+
+[node name="Title" type="Label" parent="HBoxContainer/ColorRect5"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 14.0
+offset_right = 276.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("3_0e1b6")
+theme_override_font_sizes/font_size = 50
+text = "Leaderboard"
+
+[node name="Description" type="Label" parent="HBoxContainer/ColorRect5"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 263.0
+offset_right = 280.0
+offset_bottom = 356.0
+theme_override_fonts/font = ExtResource("3_0e1b6")
+theme_override_font_sizes/font_size = 50
+text = "See the top 10 runs"
+autowrap_mode = 3
+
+[node name="leaderboard_button" type="Button" parent="HBoxContainer/ColorRect5"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 474.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u4nod")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0e1b6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8wxha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jf173")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6k0ow")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qok24")
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/ColorRect5"]
+position = Vector2(147, 161)
+scale = Vector2(5.8125, 6.15625)
+texture = ExtResource("5_jf173")
+
+[node name="ColorRect4" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+color = Color(0, 0.7073024, 0.53554285, 1)
+script = ExtResource("5_u4nod")
+
+[node name="Title" type="Label" parent="HBoxContainer/ColorRect4"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 12.0
+offset_right = 292.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("3_0e1b6")
+theme_override_font_sizes/font_size = 50
+text = "Player Stats"
+
+[node name="Description" type="Label" parent="HBoxContainer/ColorRect4"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 265.0
+offset_right = 288.0
+offset_bottom = 454.0
+theme_override_fonts/font = ExtResource("3_0e1b6")
+theme_override_font_sizes/font_size = 50
+text = "Check stats for a specific player name"
+autowrap_mode = 3
+
+[node name="player_stats_button" type="Button" parent="HBoxContainer/ColorRect4"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 474.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u4nod")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0e1b6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8wxha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jf173")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6k0ow")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qok24")
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/ColorRect4"]
+position = Vector2(152, 165)
+scale = Vector2(6.28125, 6.53125)
+texture = ExtResource("6_6k0ow")
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+color = Color(1, 0.32941177, 0.32941177, 1)
+script = ExtResource("5_u4nod")
+
+[node name="Title" type="Label" parent="HBoxContainer/ColorRect"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 17.0
+offset_right = 267.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("3_0e1b6")
+theme_override_font_sizes/font_size = 50
+text = "DEV ZONE"
+
+[node name="Description" type="Label" parent="HBoxContainer/ColorRect"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 264.0
+offset_right = 274.0
+offset_bottom = 357.0
+theme_override_fonts/font = ExtResource("3_0e1b6")
+theme_override_font_sizes/font_size = 50
+text = "Modify and delete run data..."
+autowrap_mode = 3
+
+[node name="dev_zone_button" type="Button" parent="HBoxContainer/ColorRect"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 474.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u4nod")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0e1b6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8wxha")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jf173")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6k0ow")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qok24")
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/ColorRect"]
+position = Vector2(143, 156)
+scale = Vector2(6.09375, 5.84375)
+texture = ExtResource("7_qok24")
+
+[node name="CRT" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_8ln24")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_rtw2f")
+
+[connection signal="button_up" from="Go back" to="." method="_on_go_back_button_up"]
+[connection signal="button_up" from="HBoxContainer/ColorRect5/leaderboard_button" to="." method="_on_leaderboard_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/ColorRect4/player_stats_button" to="." method="_on_player_stats_button_button_up"]
+[connection signal="button_up" from="HBoxContainer/ColorRect/dev_zone_button" to="." method="_on_dev_zone_button_button_up"]

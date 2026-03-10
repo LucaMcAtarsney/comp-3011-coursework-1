@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://rxiwc2aa6cfm"]
+
+[ext_resource type="Script" uid="uid://cij3mfodi4vb5" path="res://scripts/enemy.gd" id="1_qupug"]
+[ext_resource type="Texture2D" uid="uid://b1xerfab0xcgn" path="res://art/enemy.png" id="2_o2iik"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md0e3"]
+atlas = ExtResource("2_o2iik")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
+atlas = ExtResource("2_o2iik")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
+atlas = ExtResource("2_o2iik")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4w8v"]
+atlas = ExtResource("2_o2iik")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xwavj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md0e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ra3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4w8v")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nenq2"]
+size = Vector2(9, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
+size = Vector2(9, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
+radius = 9.0
+
+[node name="Enemy3" type="CharacterBody2D" groups=["enemy"]]
+collision_mask = 0
+script = ExtResource("1_qupug")
+speed = 15
+damage = 5
+xp = 5
+health = 7
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+self_modulate = Color(6.5698473e-06, 0.5569646, 0.13729233, 1)
+sprite_frames = SubResource("SpriteFrames_xwavj")
+animation = &"walk"
+speed_scale = 0.6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_nenq2")
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="bulletcheck" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="attackcheck" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_md0e3")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

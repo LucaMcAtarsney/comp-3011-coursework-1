@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb78whqsxqjew"]
+
+[ext_resource type="Script" uid="uid://bbbcdmubou3v8" path="res://scripts/card.gd" id="1_aevd6"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="2_4vvyl"]
+
+[node name="LeaderboardRecord" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 0
+offset_right = 1143.0
+offset_bottom = 40.0
+script = ExtResource("1_aevd6")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 3.0
+offset_right = 85.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_4vvyl")
+theme_override_font_sizes/font_size = 40
+text = "Test"
+
+[node name="RunLength" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1025.0
+offset_top = 3.0
+offset_right = 1100.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_4vvyl")
+theme_override_font_sizes/font_size = 40
+text = "100"

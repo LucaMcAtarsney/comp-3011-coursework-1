@@ -1,0 +1,161 @@
+[gd_scene load_steps=19 format=3 uid="uid://6plj1its3ukg"]
+
+[ext_resource type="Texture2D" uid="uid://7je2ncoak8ry" path="res://art/playerIdle.png" id="1_g2els"]
+[ext_resource type="Script" uid="uid://bb45jqwlcmp8v" path="res://scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://dvjlmuwufpi11" path="res://art/playerWalk.png" id="2_qhqgy"]
+[ext_resource type="Shader" uid="uid://dkddkd3g7fhoc" path="res://shaders/ring.gdshader" id="4_dqkch"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_g2els")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_g2els")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("1_g2els")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("1_g2els")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("2_qhqgy")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_qhqgy")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("2_qhqgy")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("2_qhqgy")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3v2ag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
+radius = 6.0
+height = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhqgy"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqkch"]
+bg_color = Color(1.3957917e-06, 0.48211664, 0.21079463, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
+shader = ExtResource("4_dqkch")
+shader_parameter/radius = 0.6999999843536
+shader_parameter/thickness = 0.2
+shader_parameter/color = Color(0.5027032, 0.20359758, 0.017159238, 1)
+shader_parameter/brightness = 4.3999999016512
+shader_parameter/angular_speed = 2.00999984331248
+shader_parameter/radial_speed = 1.56999985314736
+shader_parameter/alpha = 0.75999998301248
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
+radius = 30.016663
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_qhqgy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+self_modulate = Color(0.8766933, 0.8678501, 0.17161205, 1)
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_3v2ag")
+animation = &"walk"
+frame_progress = 0.987606
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CapsuleShape2D_qhqgy")
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["player"]]
+zoom = Vector2(4, 4)
+limit_left = -16
+limit_top = -16
+limit_right = 512
+limit_bottom = 304
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="health" type="ProgressBar" parent="."]
+offset_left = -6.0
+offset_top = 1.0
+offset_right = 6.0
+offset_bottom = 3.0
+theme_override_styles/background = SubResource("StyleBoxFlat_qhqgy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dqkch")
+show_percentage = false
+
+[node name="Powers" type="Node2D" parent="."]
+
+[node name="Halo" type="ColorRect" parent="Powers"]
+visible = false
+material = SubResource("ShaderMaterial_qlg0r")
+offset_left = -25.0
+offset_top = -29.0
+offset_right = 25.0
+offset_bottom = 19.0
+
+[node name="Area2D" type="Area2D" parent="Powers/Halo"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Powers/Halo/Area2D"]
+position = Vector2(25, 23)
+shape = SubResource("CircleShape2D_dqkch")
+
+[node name="Timer" type="Timer" parent="Powers/Halo"]
+
+[node name="Regen" type="Timer" parent="."]
+autostart = true
+
+[node name="LavaDmg" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="body_entered" from="Powers/Halo/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Powers/Halo/Timer" to="." method="_on_halo_timer_timeout"]
+[connection signal="timeout" from="Regen" to="." method="_on_regen_timeout"]
+[connection signal="timeout" from="LavaDmg" to="." method="_on_lava_dmg_timeout"]

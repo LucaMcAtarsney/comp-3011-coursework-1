@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6h862rh0ynd3"]
+
+[ext_resource type="Texture2D" uid="uid://cp84rf6uqax27" path="res://art/goldenapple.png" id="1_f7n5k"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="2_kbf2r"]
+
+[node name="upgrade_hud" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(2, 2)
+tooltip_text = "test"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_f7n5k")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.96474224, 0.96474224, 0.9647421, 1)
+theme_override_fonts/font = ExtResource("2_kbf2r")
+text = "0"

@@ -1,0 +1,145 @@
+[gd_scene load_steps=8 format=3 uid="uid://drtms0qy2v43w"]
+
+[ext_resource type="Script" uid="uid://b6vpvs0s1wq07" path="res://scenes/second_screen.gd" id="1_bwa2d"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="2_r1y4y"]
+[ext_resource type="Shader" uid="uid://dpdgai75l0jcj" path="res://shaders/crt.gdshader" id="3_gsblt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsqcm"]
+bg_color = Color(0.250213, 0.250213, 0.250213, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwa2d"]
+bg_color = Color(0.250213, 0.250213, 0.250213, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwa2d"]
+shader = ExtResource("3_gsblt")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.1150000054625
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.47700001939762
+shader_parameter/distort_intensity = 0.05400000256499999
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.01000004797499998
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.5110000242725
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_r1y4y"]
+
+[node name="SecondScreen" type="CanvasLayer"]
+script = ExtResource("1_bwa2d")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="New Player" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.35078126
+anchor_top = 0.37638888
+anchor_right = 0.64765626
+anchor_bottom = 0.50277776
+offset_bottom = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fsqcm")
+metadata/_edit_use_anchors_ = true
+
+[node name="NewPlayer" type="Label" parent="New Player"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.29210526
+anchor_top = 0.32967034
+anchor_right = 0.7236842
+anchor_bottom = 0.6813187
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_r1y4y")
+theme_override_font_sizes/font_size = 35
+text = "New Player"
+metadata/_edit_use_anchors_ = true
+
+[node name="Returning Player" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.353125
+anchor_top = 0.5833333
+anchor_right = 0.65
+anchor_bottom = 0.7097222
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fsqcm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Returning Player" type="Label" parent="Returning Player"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.17894737
+anchor_top = 0.34065935
+anchor_right = 0.83947366
+anchor_bottom = 0.6923077
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_r1y4y")
+theme_override_font_sizes/font_size = 35
+text = "Returning Player"
+metadata/_edit_use_anchors_ = true
+
+[node name="Go back" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.053125
+anchor_top = 0.06527778
+anchor_right = 0.12578125
+anchor_bottom = 0.15277778
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_bwa2d")
+metadata/_edit_use_anchors_ = true
+
+[node name="back" type="Label" parent="Go back"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1505376
+anchor_top = 0.2539682
+anchor_right = 0.86021507
+anchor_bottom = 0.76190466
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_r1y4y")
+theme_override_font_sizes/font_size = 35
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[node name="CRT2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_bwa2d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_r1y4y")
+
+[connection signal="button_up" from="New Player" to="." method="_on_new_player_button_up"]
+[connection signal="button_up" from="Returning Player" to="." method="_on_returning_player_button_up"]
+[connection signal="button_up" from="Go back" to="." method="_on_go_back_button_up"]

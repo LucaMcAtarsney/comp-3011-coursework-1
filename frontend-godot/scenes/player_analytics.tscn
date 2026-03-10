@@ -1,0 +1,196 @@
+[gd_scene load_steps=10 format=3 uid="uid://ct0tkibkal5yy"]
+
+[ext_resource type="Script" uid="uid://ixyq5lncmxjn" path="res://scenes/player_analytics.gd" id="1_gwa8n"]
+[ext_resource type="AudioStream" uid="uid://c1m6f8kt7qdue" path="res://underworld better.wav" id="2_nvpej"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="3_skt81"]
+[ext_resource type="Texture2D" uid="uid://cypp8ib5o0fgd" path="res://art/search.png" id="4_nvpej"]
+[ext_resource type="Shader" uid="uid://dpdgai75l0jcj" path="res://shaders/crt.gdshader" id="5_eh7lh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwxuq"]
+content_margin_left = 40.0
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.250213, 0.250213, 0.250213, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ln24"]
+shader = ExtResource("5_eh7lh")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.1150000054625
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.47700001939762
+shader_parameter/distort_intensity = 0.20000000298023
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/brightness = 1.2
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.5110000242725
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rtw2f"]
+
+[node name="Player Analytics" type="CanvasLayer"]
+script = ExtResource("1_gwa8n")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(450, 314.5)
+stream = ExtResource("2_nvpej")
+pitch_scale = 0.59
+autoplay = true
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LineEdit" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(0, 40)
+offset_left = 89.0
+offset_top = 139.0
+offset_right = 417.0
+offset_bottom = 179.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.16745135, 0.16745088, 0.167451, 0.6)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_constants/caret_width = 5
+theme_override_fonts/font = ExtResource("3_skt81")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_wwxuq")
+placeholder_text = "Search..."
+caret_blink = true
+
+[node name="Sprite2D" type="Sprite2D" parent="LineEdit"]
+position = Vector2(20, 20)
+texture = ExtResource("4_nvpej")
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.4125
+anchor_top = 0.059722222
+anchor_right = 0.64375
+anchor_bottom = 0.13472222
+offset_right = -52.0
+theme_override_fonts/font = ExtResource("3_skt81")
+theme_override_font_sizes/font_size = 60
+text = "Players"
+metadata/_edit_use_anchors_ = true
+
+[node name="Go back" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.7296875
+anchor_top = 0.05138889
+anchor_right = 0.8023437
+anchor_bottom = 0.1388889
+offset_left = -843.0
+offset_top = 5.0
+offset_right = -843.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+metadata/_edit_use_anchors_ = true
+
+[node name="back" type="Label" parent="Go back"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1505376
+anchor_top = 0.2539682
+anchor_right = 0.86021507
+anchor_bottom = 0.76190466
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_skt81")
+theme_override_font_sizes/font_size = 35
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[node name="Headers" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(300, 40)
+offset_left = 90.0
+offset_top = 202.0
+offset_right = 1237.0
+offset_bottom = 242.0
+color = Color(0.35928473, 0.65816474, 0.4888056, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Headers"]
+layout_mode = 0
+offset_left = 23.0
+offset_right = 1122.0
+offset_bottom = 40.0
+theme_override_constants/separation = 120
+
+[node name="Name" type="Label" parent="Headers/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_skt81")
+theme_override_font_sizes/font_size = 40
+text = "Name           "
+
+[node name="PlayerID" type="Label" parent="Headers/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_skt81")
+theme_override_font_sizes/font_size = 40
+
+[node name="Runs" type="Label" parent="Headers/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_skt81")
+theme_override_font_sizes/font_size = 40
+text = "Runs"
+
+[node name="CreatedAt" type="Label" parent="Headers/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_skt81")
+theme_override_font_sizes/font_size = 40
+text = "Created At"
+
+[node name="Best Run Time" type="Label" parent="Headers/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_skt81")
+theme_override_font_sizes/font_size = 40
+text = "Best Run Time"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 90.0
+offset_top = 253.0
+offset_right = 1236.0
+offset_bottom = 701.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="CRT" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_8ln24")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_rtw2f")
+
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="button_up" from="Go back" to="." method="_on_go_back_button_up"]

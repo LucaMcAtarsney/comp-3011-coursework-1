@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6a0drlj7vf43"]
+
+[ext_resource type="Script" uid="uid://bfac47d3bmj2y" path="res://scenes/db_record.gd" id="1_xluff"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="2_06yfh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xluff"]
+bg_color = Color(0.2537641, 0.3909258, 3.85046e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06yfh"]
+bg_color = Color(0.6502833, 0, 0.076678865, 1)
+
+[node name="Db Record" type="HBoxContainer"]
+custom_minimum_size = Vector2(1100, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -180.0
+offset_bottom = -666.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+script = ExtResource("1_xluff")
+
+[node name="Row" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1100, 52)
+layout_mode = 2
+
+[node name="IDLabel" type="Label" parent="Row"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 9.0
+offset_right = 131.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_06yfh")
+theme_override_font_sizes/font_size = 40
+text = "ID"
+
+[node name="NameLabel" type="Label" parent="Row"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 9.0
+offset_right = 329.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_06yfh")
+theme_override_font_sizes/font_size = 40
+text = "Name"
+
+[node name="NameEdit" type="LineEdit" parent="Row"]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 5.0
+offset_right = 554.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_06yfh")
+theme_override_font_sizes/font_size = 40
+text = "...."
+
+[node name="DetailsLabel" type="Label" parent="Row"]
+layout_mode = 0
+offset_left = 651.0
+offset_top = 10.0
+offset_right = 779.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_06yfh")
+theme_override_font_sizes/font_size = 40
+text = "Details"
+
+[node name="Actions" type="HBoxContainer" parent="Row"]
+layout_mode = 0
+offset_left = 845.0
+offset_top = 9.0
+offset_right = 1090.0
+offset_bottom = 45.0
+theme_override_constants/separation = 32
+
+[node name="EditButton" type="Button" parent="Row/Actions"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_06yfh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xluff")
+text = "Edit Name"
+
+[node name="DeleteButton" type="Button" parent="Row/Actions"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_06yfh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06yfh")
+text = "Delete"

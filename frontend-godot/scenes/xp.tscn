@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxi43nqprwi8u"]
+
+[ext_resource type="Script" uid="uid://4ximiluau2p6" path="res://scripts/xp.gd" id="1_xi7dx"]
+[ext_resource type="Shader" uid="uid://bldc2udd36kh" path="res://shaders/glow.gdshader" id="2_8cwu2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qp56h"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mkf8s"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/projectile.png-fc60954e03e56a08e989c776d3465825.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fycud"]
+shader = ExtResource("2_8cwu2")
+shader_parameter/glow_color = Color(0.44606143, 0.57636225, 0.9597438, 1)
+shader_parameter/intensity = 1.3850000657875001
+shader_parameter/spread = 1.58700007212262
+shader_parameter/pulse_speed = 1.8620000884449999
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xi7dx"]
+radius = 7.499999
+height = 19.999998
+
+[node name="xp" type="Area2D"]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_xi7dx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.7731608, 1.0498928, 1)
+self_modulate = Color(1.1806484, 1.1806484, 1.1806484, 1)
+material = SubResource("ShaderMaterial_qp56h")
+scale = Vector2(0.62499994, 1)
+texture = SubResource("CompressedTexture2D_mkf8s")
+
+[node name="TextureRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fycud")
+offset_left = -7.4999995
+offset_top = -10.0
+offset_right = 7.4999986
+offset_bottom = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_xi7dx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

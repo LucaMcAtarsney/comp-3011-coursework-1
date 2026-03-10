@@ -1,0 +1,285 @@
+[gd_scene load_steps=8 format=3 uid="uid://bggd0egwb73fq"]
+
+[ext_resource type="Script" uid="uid://da4lq2g410kwe" path="res://scenes/view_player.gd" id="1_pbdo3"]
+[ext_resource type="AudioStream" uid="uid://c1m6f8kt7qdue" path="res://underworld better.wav" id="2_5j4uj"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="3_q8rcv"]
+[ext_resource type="Shader" uid="uid://dpdgai75l0jcj" path="res://shaders/crt.gdshader" id="4_jv1r4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.250213, 0.250213, 0.250213, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ln24"]
+shader = ExtResource("4_jv1r4")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.1150000054625
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.47700001939762
+shader_parameter/distort_intensity = 0.20000000298023
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/brightness = 1.2
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.5110000242725
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rtw2f"]
+
+[node name="ViewPlayer" type="CanvasLayer"]
+script = ExtResource("1_pbdo3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(450, 314.5)
+stream = ExtResource("2_5j4uj")
+pitch_scale = 0.59
+autoplay = true
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PlayerName" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.4125
+anchor_top = 0.059722222
+anchor_right = 0.64375
+anchor_bottom = 0.13472222
+offset_right = -52.0
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 60
+text = "Player name"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Go back" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.07109375
+anchor_top = 0.058333334
+anchor_right = 0.14375
+anchor_bottom = 0.14583334
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+metadata/_edit_use_anchors_ = true
+
+[node name="back" type="Label" parent="Go back"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1505376
+anchor_top = 0.2539682
+anchor_right = 0.86021507
+anchor_bottom = 0.76190466
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 35
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 144.0
+offset_top = 165.0
+offset_right = 1184.0
+offset_bottom = 618.0
+theme_override_constants/separation = 50
+
+[node name="Row1" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="NumberOfRuns" type="ColorRect" parent="VBoxContainer/Row1"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/Row1/NumberOfRuns"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 20.0
+offset_right = 278.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "Number of Runs"
+
+[node name="Text" type="Label" parent="VBoxContainer/Row1/NumberOfRuns"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 123.0
+offset_right = 183.0
+offset_bottom = 159.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "100"
+
+[node name="TimePlayed" type="ColorRect" parent="VBoxContainer/Row1"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/Row1/TimePlayed"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 24.0
+offset_right = 258.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "Time Played"
+
+[node name="Text" type="Label" parent="VBoxContainer/Row1/TimePlayed"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 122.0
+offset_right = 190.0
+offset_bottom = 158.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "100"
+
+[node name="AvgTimeSurvived" type="ColorRect" parent="VBoxContainer/Row1"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/Row1/AvgTimeSurvived"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 22.0
+offset_right = 288.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "Average Time Survived"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Text" type="Label" parent="VBoxContainer/Row1/AvgTimeSurvived"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 121.0
+offset_right = 190.0
+offset_bottom = 157.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "100"
+
+[node name="Row2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="LongestRun" type="ColorRect" parent="VBoxContainer/Row2"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/Row2/LongestRun"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 25.0
+offset_right = 256.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "Longest Run"
+
+[node name="Text" type="Label" parent="VBoxContainer/Row2/LongestRun"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 123.0
+offset_right = 190.0
+offset_bottom = 159.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "100"
+
+[node name="FavUpgrade" type="ColorRect" parent="VBoxContainer/Row2"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/Row2/FavUpgrade"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 23.0
+offset_right = 276.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "Favourite Upgrade"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Text" type="Label" parent="VBoxContainer/Row2/FavUpgrade"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 129.0
+offset_right = 101.0
+offset_bottom = 165.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "100"
+
+[node name="MonstersSlain" type="ColorRect" parent="VBoxContainer/Row2"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/Row2/MonstersSlain"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 22.0
+offset_right = 269.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "Monsters Slain"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Text" type="Label" parent="VBoxContainer/Row2/MonstersSlain"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 130.0
+offset_right = 187.0
+offset_bottom = 166.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q8rcv")
+theme_override_font_sizes/font_size = 40
+text = "100"
+
+[node name="CRT" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_8ln24")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_rtw2f")
+
+[connection signal="button_up" from="Go back" to="." method="_on_go_back_button_up"]

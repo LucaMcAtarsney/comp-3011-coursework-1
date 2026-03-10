@@ -1,0 +1,262 @@
+[gd_scene load_steps=11 format=3 uid="uid://2s0didwb834f"]
+
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="1_b2g4b"]
+[ext_resource type="Script" uid="uid://0fwgfcw8wbu5" path="res://scripts/upgrade.gd" id="1_g1npk"]
+[ext_resource type="Texture2D" uid="uid://ji8n53lgq6jm" path="res://art/apple.png" id="2_g1npk"]
+[ext_resource type="Script" uid="uid://bbbcdmubou3v8" path="res://scripts/card.gd" id="3_346kr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_346kr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_00gwf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jnjjj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i5kin"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b42rm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_px1y0"]
+
+[node name="Upgrade" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 250.0
+pivot_offset = Vector2(200, 125)
+script = ExtResource("1_g1npk")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 250.0
+color = Color(0, 0, 0, 1)
+
+[node name="Topbar" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 16.0
+color = Color(0.21230483, 0.21230483, 0.21230483, 1)
+
+[node name="Label2" type="Label" parent="Topbar"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 121.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("1_b2g4b")
+theme_override_font_sizes/font_size = 15
+text = "upgrades.exe"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 24.0
+offset_right = 258.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("1_b2g4b")
+theme_override_font_sizes/font_size = 30
+text = "Level up!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 384.0
+offset_bottom = 232.0
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Option1" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.45455348, 0.78743297, 0, 1)
+script = ExtResource("3_346kr")
+
+[node name="ImgBG" type="ColorRect" parent="HBoxContainer/Option1"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 93.0
+offset_bottom = 87.0
+mouse_filter = 2
+
+[node name="Sprite" type="Sprite2D" parent="HBoxContainer/Option1/ImgBG"]
+position = Vector2(45, 39)
+scale = Vector2(3, 3)
+texture = ExtResource("2_g1npk")
+
+[node name="Option1DescriptionBox" type="ColorRect" parent="HBoxContainer/Option1"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 95.0
+offset_right = 93.0
+offset_bottom = 161.0
+mouse_filter = 2
+color = Color(0.6813605, 0.83079267, 0.6889429, 1)
+
+[node name="Option1DescriptionLabel" type="Label" parent="HBoxContainer/Option1/Option1DescriptionBox"]
+layout_mode = 0
+offset_top = 21.0
+offset_right = 86.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b2g4b")
+theme_override_font_sizes/font_size = 15
+text = "Heal 30 health"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Option1Name" type="Label" parent="HBoxContainer/Option1/Option1DescriptionBox"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1.0
+offset_right = 86.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b2g4b")
+theme_override_font_sizes/font_size = 16
+text = "Apple"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/Option1"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 168.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_346kr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_00gwf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jnjjj")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_i5kin")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b42rm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_px1y0")
+
+[node name="Option2" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.45455348, 0.78743297, 0, 1)
+script = ExtResource("3_346kr")
+
+[node name="ImgBG" type="ColorRect" parent="HBoxContainer/Option2"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 93.0
+offset_bottom = 87.0
+mouse_filter = 2
+
+[node name="Sprite" type="Sprite2D" parent="HBoxContainer/Option2/ImgBG"]
+position = Vector2(45, 39)
+scale = Vector2(3, 3)
+texture = ExtResource("2_g1npk")
+
+[node name="Option2DescriptionBox" type="ColorRect" parent="HBoxContainer/Option2"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 95.0
+offset_right = 93.0
+offset_bottom = 161.0
+mouse_filter = 2
+color = Color(0.6813605, 0.83079267, 0.6889429, 1)
+
+[node name="Option2DescriptionLabel" type="Label" parent="HBoxContainer/Option2/Option2DescriptionBox"]
+layout_mode = 0
+offset_top = 19.0
+offset_right = 86.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b2g4b")
+theme_override_font_sizes/font_size = 15
+text = "Heal 30 health"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Option2Name" type="Label" parent="HBoxContainer/Option2/Option2DescriptionBox"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 86.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b2g4b")
+theme_override_font_sizes/font_size = 16
+text = "Apple"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/Option2"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 168.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_346kr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_00gwf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jnjjj")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_i5kin")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b42rm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_px1y0")
+
+[node name="Option3" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.45455348, 0.78743297, 0, 1)
+script = ExtResource("3_346kr")
+
+[node name="ImgBG" type="ColorRect" parent="HBoxContainer/Option3"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 93.0
+offset_bottom = 87.0
+mouse_filter = 2
+
+[node name="Sprite" type="Sprite2D" parent="HBoxContainer/Option3/ImgBG"]
+position = Vector2(45, 39)
+scale = Vector2(3, 3)
+texture = ExtResource("2_g1npk")
+
+[node name="Option3DescriptionBox" type="ColorRect" parent="HBoxContainer/Option3"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 95.0
+offset_right = 93.0
+offset_bottom = 161.0
+mouse_filter = 2
+color = Color(0.6813605, 0.83079267, 0.6889429, 1)
+
+[node name="Option3DescriptionLabel" type="Label" parent="HBoxContainer/Option3/Option3DescriptionBox"]
+layout_mode = 0
+offset_top = 18.0
+offset_right = 85.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b2g4b")
+theme_override_font_sizes/font_size = 15
+text = "Heal 30 health"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Option3Name" type="Label" parent="HBoxContainer/Option3/Option3DescriptionBox"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 87.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_b2g4b")
+theme_override_font_sizes/font_size = 16
+text = "Apple"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/Option3"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 168.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_346kr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_00gwf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jnjjj")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_i5kin")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b42rm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_px1y0")

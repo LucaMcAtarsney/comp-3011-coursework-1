@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://dc2eiypecq7nt"]
+
+[ext_resource type="Script" uid="uid://hw13gdgn3rlf" path="res://scripts/options.gd" id="1_2iy26"]
+[ext_resource type="FontFile" uid="uid://dmx3odj3anx6m" path="res://fonts/BoldPixels.ttf" id="2_yjkok"]
+[ext_resource type="Shader" uid="uid://dpdgai75l0jcj" path="res://shaders/crt.gdshader" id="3_2iy26"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e6vpq"]
+bg_color = Color(0.250213, 0.250213, 0.250213, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kv8mn"]
+shader = ExtResource("3_2iy26")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.1150000054625
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.47700001939762
+shader_parameter/distort_intensity = 0.20000000298023
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03000004892500007
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.5110000242725
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1sggn"]
+
+[node name="Options" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_2iy26")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Give up" type="Button" parent="BG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -34.0
+offset_right = 190.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_e6vpq")
+
+[node name="Label" type="Label" parent="BG/Give up"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 22.5
+offset_right = 269.0
+offset_bottom = 67.5
+theme_override_fonts/font = ExtResource("2_yjkok")
+theme_override_font_sizes/font_size = 50
+text = "Give up"
+
+[node name="Label" type="Label" parent="BG"]
+layout_mode = 0
+offset_left = 539.0
+offset_top = 182.0
+offset_right = 720.0
+offset_bottom = 227.0
+theme_override_fonts/font = ExtResource("2_yjkok")
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+
+[node name="CRT" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_kv8mn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_1sggn")
+
+[connection signal="button_down" from="BG/Give up" to="." method="_on_give_up_button_down"]
