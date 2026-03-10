@@ -1674,6 +1674,100 @@ To perform this operation, you must be authenticated by means of one of the foll
 HTTPBasic
 </aside>
 
+## Update Run From Game
+
+<a id="opIdupdate_run_from_game_runs__run_id__update_patch"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PATCH /runs/{run_id}/update \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.patch('/runs/{run_id}/update', headers = headers)
+
+print(r.json())
+
+```
+
+`PATCH /runs/{run_id}/update`
+
+> Body parameter
+
+```json
+{
+  "duration_seconds": 0,
+  "kills_total": 0,
+  "level": 0,
+  "xp": 0,
+  "upgrades": {
+    "property1": 0,
+    "property2": 0
+  },
+  "status": "in_progress",
+  "ended_at": "2019-08-24T14:15:22Z",
+  "cause_of_death": "string"
+}
+```
+
+<h3 id="update-run-from-game-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|run_id|path|integer|true|none|
+|body|body|[RunUpdate](#schemarunupdate)|true|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "player_id": 0,
+  "map_id": "string",
+  "id": 0,
+  "player": {
+    "name": "string",
+    "id": 0,
+    "created_at": "2019-08-24T14:15:22Z"
+  },
+  "started_at": "2019-08-24T14:15:22Z",
+  "status": "in_progress",
+  "duration_seconds": 0,
+  "level": 0,
+  "xp": 0,
+  "kills_total": 0,
+  "upgrades": {
+    "property1": 0,
+    "property2": 0
+  },
+  "ended_at": "2019-08-24T14:15:22Z",
+  "cause_of_death": "string"
+}
+```
+
+<h3 id="update-run-from-game-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Successful Response|[Run](#schemarun)|
+|422|[Unprocessable Entity](https://tools.ietf.org/html/rfc2518#section-10.3)|Validation Error|[HTTPValidationError](#schemahttpvalidationerror)|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 ## Test Endpoint One
 
 <a id="opIdtest_endpoint_one_test1_get"></a>

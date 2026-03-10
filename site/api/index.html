@@ -546,6 +546,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#update-run-from-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Run From Game
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#test-endpoint-one" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -871,6 +882,17 @@
     <span class="md-ellipsis">
       
         Admin Delete Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-run-from-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Update Run From Game
       
     </span>
   </a>
@@ -3839,6 +3861,132 @@ print(r.json())
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
 HTTPBasic
+</aside>
+
+<h2 id="update-run-from-game">Update Run From Game</h2>
+<p><a id="opIdupdate_run_from_game_runs__run_id__update_patch"></a></p>
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<pre><code class="language-shell"># You can also use wget
+curl -X PATCH /runs/{run_id}/update \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+</code></pre>
+<pre><code class="language-python">import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.patch('/runs/{run_id}/update', headers = headers)
+
+print(r.json())
+
+</code></pre>
+<p><code>PATCH /runs/{run_id}/update</code></p>
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;duration_seconds&quot;: 0,
+  &quot;kills_total&quot;: 0,
+  &quot;level&quot;: 0,
+  &quot;xp&quot;: 0,
+  &quot;upgrades&quot;: {
+    &quot;property1&quot;: 0,
+    &quot;property2&quot;: 0
+  },
+  &quot;status&quot;: &quot;in_progress&quot;,
+  &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;cause_of_death&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="update-run-from-game-parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>run_id</td>
+<td>path</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemarunupdate">RunUpdate</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Example responses</p>
+<p>200 Response</p>
+</blockquote>
+<pre><code class="language-json">{
+  &quot;player_id&quot;: 0,
+  &quot;map_id&quot;: &quot;string&quot;,
+  &quot;id&quot;: 0,
+  &quot;player&quot;: {
+    &quot;name&quot;: &quot;string&quot;,
+    &quot;id&quot;: 0,
+    &quot;created_at&quot;: &quot;2019-08-24T14:15:22Z&quot;
+  },
+  &quot;started_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;status&quot;: &quot;in_progress&quot;,
+  &quot;duration_seconds&quot;: 0,
+  &quot;level&quot;: 0,
+  &quot;xp&quot;: 0,
+  &quot;kills_total&quot;: 0,
+  &quot;upgrades&quot;: {
+    &quot;property1&quot;: 0,
+    &quot;property2&quot;: 0
+  },
+  &quot;ended_at&quot;: &quot;2019-08-24T14:15:22Z&quot;,
+  &quot;cause_of_death&quot;: &quot;string&quot;
+}
+</code></pre>
+<h3 id="update-run-from-game-responses">Responses</h3>
+
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Successful Response</td>
+<td><a href="#schemarun">Run</a></td>
+</tr>
+<tr>
+<td>422</td>
+<td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
+<td>Validation Error</td>
+<td><a href="#schemahttpvalidationerror">HTTPValidationError</a></td>
+</tr>
+</tbody>
+</table>
+<aside class="success">
+This operation does not require authentication
 </aside>
 
 <h2 id="test-endpoint-one">Test Endpoint One</h2>

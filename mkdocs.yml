@@ -9,6 +9,8 @@ plugins:
   - with-pdf:
       author: API Docs Generator
       cover_title: Survival Video Game with API Integration
+      cover_subtitle: API Documentation
+      copyright: Copyright © 2026
       output_path: ../api-documentation.pdf
       
 markdown_extensions:
