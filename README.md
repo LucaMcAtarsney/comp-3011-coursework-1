@@ -41,6 +41,20 @@ For the sake of demonstration the admin login is -
 username: admin,
 password: admin
 
+## Frontend / GUI
+
+This project includes a graphical user interface (GUI) built with the **Godot Engine**.
+
+### Local Usage
+
+To run the GUI locally, you would need to download the separate Godot project files, open them in the Godot Engine editor, and run the project. The API base URL in the Godot project would need to be set to `http://127.0.0.1:8000`.
+
+### Deployed Version (Recommended)
+
+For users who do not wish to install the Godot Engine, a fully functional, deployed version of the GUI is available online. This version is already connected to the live API.
+
+You can access it here: **[https://pentgon.com/projects/comp-3011](https://pentgon.com/projects/comp-3011)**
+
 ## Setup and Installation (DEPLOYED)
 An interactive version of the project is available at `https://pentgon.com/projects/comp-3011`. This godot build uses `"https://comp-3011-coursework-1.onrender.com"` as the base url as opposed to `http://127.0.0.1:8000` when running locally.
 
